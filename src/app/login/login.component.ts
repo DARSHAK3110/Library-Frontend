@@ -33,13 +33,13 @@ export class LoginComponent {
 
    this.loginService.doLogin(this.user).subscribe(
     (response:any) =>{
-      this.loginService.loginUser(response.token);
-      window.location.href="/";
+      this.loginService.loginUser(response.token, response.role,response.refreshToken, response.userId);
+         window.location.href="/";
+      
     },
     error=>{
-      this.error_msg = error.error.message;
+      this.error_msg = error;
       if(this.error_msg.length>0){
-        console.log(this.error_msg.length);
         this.isError= true;
       }
     }

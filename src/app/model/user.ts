@@ -1,9 +1,9 @@
 
 export class User {
-    firtstName?:string
+    firstName?:string
     lastName?:string
     password?:string
-    id?:number
+    userId?:number
     phoneNumber?:number
     role?:string
 

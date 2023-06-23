@@ -3,10 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { loginGuard } from './guard/login.guard';
 import { LoginComponent } from './login/login.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 const routes: Routes = [
 
   {
-    path:"",
+    path:"dashboard",
     component: DashboardComponent,
     pathMatch: "full",
     canActivate: [loginGuard]
@@ -15,6 +16,12 @@ const routes: Routes = [
     path:"login",
     component: LoginComponent,
     pathMatch:"full"
+  },
+  { path: "", 
+    redirectTo: "/dashboard",
+    pathMatch: "full" },
+  { path: "**",
+    component: PageNotFoundComponent
   },
 ];
 

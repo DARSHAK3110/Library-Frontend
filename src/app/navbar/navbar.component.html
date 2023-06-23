@@ -1,38 +1,12 @@
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
    
-    <div class="container">
-    
+      <mat-toolbar color="primary">
+        <mat-toolbar-row>
+          <span   routerLink="/dashboard">Authentication App</span>
+          <span class="menu-right"> </span>
+            <div>
+              <button class="btn btn-warning" (click)="logout()">Logout</button>
+            </div>
+        </mat-toolbar-row>
+        
+       </mat-toolbar>
      
-      <!-- Toggle button -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-mdb-toggle="collapse"
-        data-mdb-target="#navbarButtonsExample"
-        aria-controls="navbarButtonsExample"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <i class="fas fa-bars"></i>
-      </button>
-  
-      <div class="collapse navbar-collapse" id="navbarButtonsExample">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="">Authenticator</a>
-          </li>
-        </ul>
-  
-        <div class="d-flex align-items-center">
-          <button type="button" class="btn btn-mute px-3 me-2">
-            <a class="nav-link" (click)="logout()">Logout</a>
-          </button>
-          
-        </div>
-      </div>
-     
-    </div>
-   
-  </nav>
-  

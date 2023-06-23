@@ -1,0 +1,113 @@
+<div>
+    <div class="modal-header">
+      <h4 class="modal-title">Add/Edit User</h4>
+    </div>
+    
+    
+    
+    
+    
+    <div class="modal-body">
+        <div class="text-danger" *ngIf="isError">*{{error_msg}}</div>
+        <form [formGroup]='form' >
+
+            <div class="form-group">
+                <label for="firstName">First name</label>
+                <input type="text" class="form-control" id="first-name" formControlName="firstName"
+                    placeholder="Enter first name" name="firstName">
+                            <div *ngIf="fc.firstName.errors?.required">     
+                <div class="text-danger" *ngIf="fc.firstName.touched && fc.firstName.invalid">
+                    First name required.
+                </div>
+                </div>
+                            <div *ngIf="!fc.firstName.errors?.required">
+                <div *ngIf="fc.firstName.errors?.NoSpaceValidator">
+                    <div class="text-danger" *ngIf="fc.firstName.touched && fc.firstName.invalid">
+                    First name invalid!!! First name noy contains space!!!
+                    </div>
+                </div>
+                </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="lastName">Last name</label>
+                    <input type="text" class="form-control" id="last-name" formControlName="lastName"
+                        placeholder="Enter last name" name="lastName" 
+                        
+                        >
+                                <div *ngIf="fc.lastName.errors?.required">     
+                    <div class="text-danger" *ngIf="fc.lastName.touched && fc.lastName.invalid">
+                        Last name required.
+                    </div>
+                    </div>
+                                <div *ngIf="!fc.lastName.errors?.required">
+                    <div *ngIf="fc.lastName.errors?.NoSpaceValidator">
+                        <div class="text-danger" *ngIf="fc.lastName.touched && fc.lastName.invalid">
+                        Last name invalid!!! Last name noy contains space!!!
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+    
+
+
+            <div class="form-group" >
+                <label for="phone-number">Phone number:</label>
+                <input type="number" [ngClass]=" !isAdd ? 'disabled': '' " class="form-control" id="phone-number" formControlName="phoneNumber"
+                    placeholder="Enter phone number" name="phoneNumber" value="user.phoneNumber">
+                            <div *ngIf="fc.phoneNumber.errors?.required">     
+                <div class="text-danger" *ngIf="fc.phoneNumber.touched && fc.phoneNumber.invalid">
+                    Phone number required.
+                </div>
+                </div>
+                            <div *ngIf="!fc.phoneNumber.errors?.required">
+                <div *ngIf="fc.phoneNumber.errors?.phoneNumberValidation">
+                    <div class="text-danger" *ngIf="fc.phoneNumber.touched && fc.phoneNumber.invalid">
+                    Phone number invalid!!! Phone number must be 10 digits!!!
+                    </div>
+                </div>
+                </div>
+                </div>
+            <div class="form-group" >
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" formControlName="password"
+                    placeholder="Enter password" name="password" [(ngModel)]="user.password">
+                    <div *ngIf = "fc.password.errors?.required">
+    <div class="text-danger " *ngIf="fc.password.touched && fc.password.invalid">
+        Password required.
+    </div>
+                    </div>
+                    <div *ngIf="fc.password.errors?.minlength">
+                        <div class="text-danger" *ngIf="fc.password.touched && fc.password.invalid">
+                            Password must contain minimum 6 characters!!!
+                        </div>
+                    </div><div *ngIf="fc.password.errors?.maxlength">
+                        <div class="text-danger" *ngIf="fc.password.touched && fc.password.invalid">
+                            Password contain maximum 8 characters!!!
+                        </div>
+                    </div>
+            </div>
+            <br>
+       
+            <div class="modal-footer">
+                <button type="button"
+                  class="btn btn-outline-dark"
+                  (click)="activeModal.close(false)">Cancel</button>
+                <button type="button"
+                  class="btn btn-success" [disabled]="form.invalid"
+                  (click)="saveUser()">Submit</button>
+              </div>
+        </form>
+
+    </div>
+
+
+
+
+
+
+
+
+
+    
