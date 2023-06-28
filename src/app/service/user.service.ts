@@ -12,10 +12,7 @@ url:string = String("http://localhost:8080/api/v1/users");
    }
 
   getUsers(pageSize:number, setSize:number, searchFirst:string = "", searchLast:string = "", searchPhone:string = "" ){
-    let searchWord:any = {"firstName":searchFirst,"lastName": searchLast,"phoneNumber": searchPhone,"pageNumber": pageSize, "setSize": setSize};
-    console.log(searchWord);
-    
-    return this.httpClient.get(this.url,{params:new HttpParams().set( "searchWord",JSON.stringify(searchWord) )}).pipe(catchError(this.handleError));
+    return this.httpClient.get(this.url,{params:new HttpParams().set( "firstName",searchFirst).set("lastName", searchLast).set("phoneNumber",searchPhone).set("pageNumber",pageSize).set("setSize",setSize)}).pipe(catchError(this.handleError));
   }
 
   getUser(userId:number){

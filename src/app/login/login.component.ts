@@ -19,6 +19,7 @@ export class LoginComponent {
       password: ['',[Validators.required, Validators.minLength(6), Validators.maxLength(8)]]
     });
   }
+
   
   get fc(){
     return this.form.controls;

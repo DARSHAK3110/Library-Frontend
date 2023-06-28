@@ -5,7 +5,7 @@
     <form [formGroup]='form' (ngSubmit) = "onSubmit()">
         <div class="form-group">
             <label for="phone-number">Phone number:</label>
-            <input type="number" class="form-control" id="phone-number" formControlName="phoneNumber"
+            <input type="number" class="form-control" id="phone-number"  formControlName="phoneNumber"
                 placeholder="Enter phone number" name="phoneNumber">
                         <div *ngIf="fc.phoneNumber.errors?.required">     
             <div class="text-danger" *ngIf="fc.phoneNumber.touched && fc.phoneNumber.invalid">
@@ -40,6 +40,6 @@
                 </div>
         </div>
         <br>
-        <button type="submit" class="btn btn-success" [disabled]="form.invalid">Submit</button>
+        <button type="submit" class="btn btn-success" [disabled]="form.invalid" >Submit</button>
     </form>
 </div>

@@ -3,7 +3,7 @@
     <div class="col-4">
       <div class="input-group">
         <div class="form-outline">
-          <input type="search" id="form1" (blur)="getUsers()" (input)="getUsers()" placeholder="Search by first name"
+          <input type="search" id="form1"  (blur)="getUsers()" (input)="getUsers()" placeholder="Search by first name"
             name="search" [(ngModel)]="searchFirst" class="form-control" />
         </div>
         <button type="button" class="btn btn-primary" (click)="getUsers()">
@@ -37,7 +37,7 @@
 
 
 
-<div class="d-flex justify-content-end">
+<div class="d-flex justify-content-end mt-3">
   <button type="button" class="btn btn-primary add-btn" (click)="addEditUser(0)"><i class="fas fa-plus"></i>
     Add</button>
 </div>
@@ -45,7 +45,7 @@
   <cdk-accordion-item *ngFor="let user of users; let i = index;" #accordionItem="cdkAccordionItem"
     class="example-accordion-item" role="button" tabindex="0" [attr.id]="'accordion-header-' + i"
     [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + i">
-    <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+    <div class="example-accordion-item-header"  (click)="accordionItem.toggle()">
       {{ user.firstName }}
       <span class="example-accordion-item-description">
 
@@ -90,7 +90,7 @@
     </div>
   </cdk-accordion-item>
 </cdk-accordion>
-<mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
+<mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize" 
   [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
 </mat-paginator>
 </div>

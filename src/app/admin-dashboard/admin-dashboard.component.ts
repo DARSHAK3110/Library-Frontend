@@ -1,4 +1,4 @@
-import { Component, ViewContainerRef, ViewChild  } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild  } from '@angular/core';
 import { UserService } from '../service/user.service';
 import { LoginService } from '../service/login.service';
 import { ModalService } from '../service/modal.service';
@@ -27,7 +27,7 @@ export class AdminDashboardComponent {
   pageSize = 2;
   currentPage = 0;
   pageSizeOptions: number[] = [2, 5, 10];
-   Toast:any = Swal.mixin({
+  Toast:any = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
@@ -44,24 +44,27 @@ export class AdminDashboardComponent {
     this.getUsers()
 
   }
+  @Output() goToPage = new EventEmitter<number>();
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
 
+  
   pageChanged(event: PageEvent) {
-    this.pageSize = event.pageSize;
-    this.currentPage = event.pageIndex;
-    this.getUsers();
+    console.log(event);
     
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex; 
+    this.users();
   }
   
   getUsers(){
   this.userService.getUsers(this.currentPage,this.pageSize,this.searchFirst,this.searchLast,this.searchPhone).subscribe(
     (userDto:any)=>{
-      this.users = userDto.users;
-      this.totalRows =userDto.totalUser;
-  },(error)=>{
+      this.users = userDto.content;
+      this.totalRows =userDto.totalElements;
+    },(error)=>{
     this.Toast.fire({
       icon: 'error',
       title: 'Something went wrong!!'
@@ -69,6 +72,7 @@ export class AdminDashboardComponent {
   }
   )
 }  
+
   
   deleteUser(phoneNumber:number){
     this.modalService.onDelete("Are you sure delete this user?","DeleteUser").pipe(take(1)).subscribe(result=>{

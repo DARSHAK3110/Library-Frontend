@@ -74,7 +74,7 @@ export class AddEditUserModalComponent {
 
     }
     else{
-      this.userService.updateUser(this.user,this.user.userId).subscribe((res)=>{
+      this.userService.updateUser(this.user, phoneNumber).subscribe((res)=>{
         this.activeModal.close(true);
       },
       (error)=>{
