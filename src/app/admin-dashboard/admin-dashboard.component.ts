@@ -44,19 +44,15 @@ export class AdminDashboardComponent {
     this.getUsers()
 
   }
-  @Output() goToPage = new EventEmitter<number>();
-
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
 
   
   pageChanged(event: PageEvent) {
-    console.log(event);
-    
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex; 
-    this.users();
+    this.getUsers();
   }
   
   getUsers(){
