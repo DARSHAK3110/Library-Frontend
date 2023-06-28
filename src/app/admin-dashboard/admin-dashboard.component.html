@@ -1,89 +1,97 @@
 <div class="container mt-3">
-  <div class="col-6">
-    <div class="input-group">
-      <div class="form-outline">
-        <input type="search" id="form1" (blur) = "getUsers()" (input)="searchUser()" placeholder="Search" name= "search" [(ngModel)]= "search" class="form-control" />
-      </div>
-      <button type="button" class="btn btn-primary" (click) = "getUsers()">
-        <i class="fas fa-search"></i>
-      </button>
-    </div>
-    
-  </div>
- 
-    <div class="d-flex justify-content-end">
-      <button type="button"
-      class="btn btn-primary add-btn"
-      (click)="addEditUser(0)"><i class="fas fa-plus"></i> Add</button>
+  <div class="row">
+    <div class="col-4">
+      <div class="input-group">
+        <div class="form-outline">
+          <input type="search" id="form1" (blur)="getUsers()" (input)="getUsers()" placeholder="Search by first name"
+            name="search" [(ngModel)]="searchFirst" class="form-control" />
         </div>
-    <cdk-accordion class="example-accordion mt-2">
-        <cdk-accordion-item
-          *ngFor="let user of users; let i = index;"
-          #accordionItem="cdkAccordionItem"
-          class="example-accordion-item"
-          role="button"
-          tabindex="0"
-          [attr.id]="'accordion-header-' + i"
-          [attr.aria-expanded]="accordionItem.expanded"
-          [attr.aria-controls]="'accordion-body-' + i">
-          <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-            {{ user.firstName }}
-            <span class="example-accordion-item-description">
-               
-              Phone Number: {{ user.phoneNumber }}
-            </span>
-          </div>
-          <div
-            class="example-accordion-item-body"
-            role="region"
-            [style.display]="accordionItem.expanded ? '' : 'none'"
-            [attr.id]="'accordion-body-' + i"
-            [attr.aria-labelledby]="'accordion-header-' + i">
-          
-            <table  class="w-100 border-1 " style="font-size: 16px;">
-                <tr class="p-3">
-                    <th>First Name</th>
-                    <td>{{user.firstName}}</td>
-                </tr>
-                <tr  class="p-3">
-                    <th>Last Name</th>
-                    <td>{{user.lastName}}</td>
-                </tr>
-                <tr  class="p-3">
-                    <th>Phone Number</th>
-                    <td>{{user.phoneNumber}}</td>
-                </tr>
-                <tr  class="p-3">
-                    <th>Role</th>
-                    <td>{{user.role}}</td>
-                </tr>
-                <tr  class="p-3">
-                    <th></th>
-                    <td><div class="d-flex justify-content-end">
-                      <button type="button"
-                      class="btn btn-danger w-25 m-1"
-                      (click)="deleteUser(user.phoneNumber)">Delete User</button>
-                    
-<button type="button"
-class="btn btn-success m-1 w-25"
-(click)="addEditUser(user.phoneNumber)">Edit</button>
-                      
-                    </div>
-                </td>      
-                </tr>
-            </table>
-            
-          </div>
-        </cdk-accordion-item>
-      </cdk-accordion>
-      <mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
-      [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
-    </mat-paginator>
-    <!--   <mat-paginator [pageSizeOptions]="[2, 5, 10]"
-                 showFirstLastButtons
-                 aria-label="Select page of periodic elements">
-  </mat-paginator> -->
-  
-   
+        <button type="button" class="btn btn-primary" (click)="getUsers()">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="input-group">
+        <div class="form-outline">
+          <input type="search" id="form2" (blur)="getUsers()" (input)="getUsers()" placeholder="Search by last name"
+            name="search" [(ngModel)]="searchLast" class="form-control" />
+        </div>
+        <button type="button" class="btn btn-primary" (click)="getUsers()">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="input-group">
+        <div class="form-outline">
+          <input type="number" id="form3" (blur)="getUsers()" (input)="getUsers()"
+            placeholder="Search by phone number" name="search" [(ngModel)]="searchPhone" class="form-control" />
+        </div>
+        <button type="button" class="btn btn-primary" (click)="getUsers()">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+
+<div class="d-flex justify-content-end">
+  <button type="button" class="btn btn-primary add-btn" (click)="addEditUser(0)"><i class="fas fa-plus"></i>
+    Add</button>
+</div>
+<cdk-accordion class="example-accordion mt-2">
+  <cdk-accordion-item *ngFor="let user of users; let i = index;" #accordionItem="cdkAccordionItem"
+    class="example-accordion-item" role="button" tabindex="0" [attr.id]="'accordion-header-' + i"
+    [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + i">
+    <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+      {{ user.firstName }}
+      <span class="example-accordion-item-description">
+
+        Phone Number: {{ user.phoneNumber }}
+      </span>
+    </div>
+    <div class="example-accordion-item-body" role="region" [style.display]="accordionItem.expanded ? '' : 'none'"
+      [attr.id]="'accordion-body-' + i" [attr.aria-labelledby]="'accordion-header-' + i">
+
+      <table class="w-100 border-1 " style="font-size: 16px;">
+        <tr class="p-3">
+          <th>First Name</th>
+          <td>{{user.firstName}}</td>
+        </tr>
+        <tr class="p-3">
+          <th>Last Name</th>
+          <td>{{user.lastName}}</td>
+        </tr>
+        <tr class="p-3">
+          <th>Phone Number</th>
+          <td>{{user.phoneNumber}}</td>
+        </tr>
+        <tr class="p-3">
+          <th>Role</th>
+          <td>{{user.role}}</td>
+        </tr>
+        <tr class="p-3">
+          <th></th>
+          <td>
+            <div class="d-flex justify-content-end">
+              <button type="button" class="btn btn-danger w-25 m-1" (click)="deleteUser(user.phoneNumber)">Delete
+                User</button>
+
+              <button type="button" class="btn btn-success m-1 w-25"
+                (click)="addEditUser(user.phoneNumber)">Edit</button>
+
+            </div>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+  </cdk-accordion-item>
+</cdk-accordion>
+<mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
+</mat-paginator>
 </div>
 

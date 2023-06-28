@@ -11,8 +11,11 @@ url:string = String("http://localhost:8080/api/v1/users");
   constructor(private httpClient: HttpClient) {
    }
 
-  getUsers(pageSize:number, setSize:number, search:string = ""){
-    return this.httpClient.get(this.url,{params:new HttpParams().set('pageNumber',pageSize).set('setSize',setSize).set('searchWord', search)}).pipe(catchError(this.handleError));
+  getUsers(pageSize:number, setSize:number, searchFirst:string = "", searchLast:string = "", searchPhone:string = "" ){
+    let searchWord:any = {"firstName":searchFirst,"lastName": searchLast,"phoneNumber": searchPhone,"pageNumber": pageSize, "setSize": setSize};
+    console.log(searchWord);
+    
+    return this.httpClient.get(this.url,{params:new HttpParams().set( "searchWord",JSON.stringify(searchWord) )}).pipe(catchError(this.handleError));
   }
 
   getUser(userId:number){

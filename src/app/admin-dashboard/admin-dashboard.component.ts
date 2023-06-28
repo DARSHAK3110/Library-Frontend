@@ -16,7 +16,9 @@ export class AdminDashboardComponent {
 
   displayedColumns: string[] = ['FirstName', 'LastName', 'PhoneNumber', 'Role'];
   users:any;
-  search:string = "";
+  searchFirst:string = "";
+  searchLast:string = "";
+  searchPhone:string = "";
   deleteUserResult: boolean = true;
   userId!:number;
   operationStatus!:boolean;
@@ -55,7 +57,7 @@ export class AdminDashboardComponent {
   }
   
   getUsers(){
-  this.userService.getUsers(this.currentPage,this.pageSize,this.search).subscribe(
+  this.userService.getUsers(this.currentPage,this.pageSize,this.searchFirst,this.searchLast,this.searchPhone).subscribe(
     (userDto:any)=>{
       this.users = userDto.users;
       this.totalRows =userDto.totalUser;
@@ -122,11 +124,6 @@ addEditUser(phoneNumber:number){
   
 }
 
-searchUser(){
-  if(this.search == ''){
-    this.getUsers();
-  }
-}
 }
 
 

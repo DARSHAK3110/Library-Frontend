@@ -14,7 +14,6 @@ export class LoginComponent {
   form:any;
   user!: User;
   constructor(formBuilder: FormBuilder, private loginService:LoginService){
-
     this.form =  formBuilder.group({
       phoneNumber: ['',[Validators.required, Validators.min(1000000000), Validators.max(9999999999), phoneNumberValidator.phoneNumberValidations]],
       password: ['',[Validators.required, Validators.minLength(6), Validators.maxLength(8)]]
