@@ -9,7 +9,7 @@ import { catchError, throwError } from 'rxjs';
 })
 export class LoginService {
   
-  url = "http://localhost:8080/api/v1/users";
+  url = "http://localhost:8095/api/v1/users";
   constructor(private http:HttpClient) {
 
    }
@@ -53,7 +53,7 @@ export class LoginService {
   getRefToken(){
     let token = String(localStorage.getItem("refreshToken"));
     localStorage.removeItem("token");
-    let result:any = this.http.post("http://localhost:8080/api/v1/users/refresh",token);
+    let result:any = this.http.post(this.url+"/refresh",token);
     return result;
   
   }

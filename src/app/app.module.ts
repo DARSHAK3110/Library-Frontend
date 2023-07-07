@@ -21,6 +21,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
+import {MatSelectModule} from '@angular/material/select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteUserModalComponent } from './modals/delete-user-modal/delete-user-modal.component';
 import { AddEditUserModalComponent } from './modals/add-edit-user-modal/add-edit-user-modal.component';
@@ -39,6 +40,7 @@ import { AddEditUserModalComponent } from './modals/add-edit-user-modal/add-edit
   imports: [
     BrowserModule,
     FormsModule,
+    MatSelectModule,
     MatPaginatorModule,
     MatTableModule,
     MatFormFieldModule,

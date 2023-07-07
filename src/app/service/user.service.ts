@@ -7,7 +7,7 @@ import { catchError, throwError } from 'rxjs';
 })
 export class UserService {
   
-url:string = String("http://localhost:8080/api/v1/users");
+url:string = String("http://localhost:8095/api/v1/users");
   constructor(private httpClient: HttpClient) {
    }
 
