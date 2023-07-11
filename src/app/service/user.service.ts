@@ -11,7 +11,7 @@ url:string = String("http://localhost:8095/api/v1/users");
   constructor(private httpClient: HttpClient) {
    }
 
-  getUsers(pageSize:number, setSize:number, searchFirst:string = "", searchLast:string = "", searchPhone:string = "" ){
+  getUsers(pageSize:number, setSize:number, searchFirst:string , searchLast:string , searchPhone:string ){
     return this.httpClient.get(this.url,{params:new HttpParams().set( "firstName",searchFirst).set("lastName", searchLast).set("phoneNumber",searchPhone).set("pageNumber",pageSize).set("setSize",setSize)}).pipe(catchError(this.handleError));
   }
 

@@ -35,7 +35,7 @@ export class AuthInterceptor  implements HttpInterceptor{
       }
     
     private handleJwtexpiration(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
-       localStorage.removeItem("token")
+       //localStorage.removeItem("token")
       
         if(this.isRefreshingToken){
    
@@ -54,7 +54,6 @@ export class AuthInterceptor  implements HttpInterceptor{
            
             concatMap((res:any)=>{
                 localStorage.setItem("token",res.token);
-                    localStorage.setItem("refreshToken",res.refreshToken);
                                       this.tokenRefreshed$.next(true);
                   return next.handle(this.addToken(req));
               }),

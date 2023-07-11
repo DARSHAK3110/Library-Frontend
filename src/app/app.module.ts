@@ -25,6 +25,10 @@ import {MatSelectModule} from '@angular/material/select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteUserModalComponent } from './modals/delete-user-modal/delete-user-modal.component';
 import { AddEditUserModalComponent } from './modals/add-edit-user-modal/add-edit-user-modal.component';
+import { UploadComponent } from './components/admin/upload/upload.component';
+import { UsersComponent } from './components/admin/users/users.component';
+import { FormatPipe } from './pipe/table/format.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +40,10 @@ import { AddEditUserModalComponent } from './modals/add-edit-user-modal/add-edit
     UserDashboardComponent,
     DeleteUserModalComponent,
     AddEditUserModalComponent,
+    UploadComponent,
+    UsersComponent,
+    FormatPipe,
+
   ],
   imports: [
     BrowserModule,

@@ -26,8 +26,7 @@ export class LoginService {
   loginUser(token:string, role:string, refreshToken:string, userId:any){
     localStorage.setItem("token",token);
     localStorage.setItem("role",role);
-    localStorage.setItem("refreshToken",refreshToken)
-    localStorage.setItem("userId",userId)
+    localStorage.setItem("userId",userId);
     return true;
   }
 
@@ -41,6 +40,8 @@ export class LoginService {
 
   logoutUser(){
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    localStorage.removeItem("userId");
     window.location.href="/login"
     return true;
   }
@@ -51,7 +52,7 @@ export class LoginService {
 
 
   getRefToken(){
-    let token = String(localStorage.getItem("refreshToken"));
+    let token = String(localStorage.getItem("userId"));
     localStorage.removeItem("token");
     let result:any = this.http.post(this.url+"/refresh",token);
     return result;

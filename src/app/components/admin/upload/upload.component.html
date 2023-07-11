@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="storage mt-2 ">
+
+    <h2>Data upload by Excel sheet</h2>
+    <div class="row">
+      <div class="col-3">
+        <mat-form-field>
+          <mat-label>Select an option</mat-label>
+          <mat-select [(value)]="selectedField">
+            <mat-option value="author">Author</mat-option>
+            <mat-option value="book">Book</mat-option>
+            <mat-option value="borrowing">Borrowing</mat-option>
+            <mat-option value="genre">Genre</mat-option>
+            <mat-option value="librarians">Librarians</mat-option>
+            <mat-option value="member">Member</mat-option>
+            <mat-option value="reservation">Reservation</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+      <div class="col-3 my-auto">
+        <div class="sheet">
+          <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="setfileName($event)"
+            accept=".xlsx" />
+          <button mat-flat-button color="primary" (click)="csvInput.click()">Choose File (.xlsx)</button>
+        </div>
+      </div>
+      <div class="col-4 my-auto text-success tw-bold ">{{fileName}}</div>
+      <div class="col-2 my-auto">
+        <button mat-flat-button color="accent" (click)="submitFile()" [disabled]="!file ">Submit</button>
+      </div>
+    </div>
+  </div>
+  <div class="" *ngIf="isDataAvail">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
+        <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+        <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
+      (page)="pageChanged($event)" aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>
