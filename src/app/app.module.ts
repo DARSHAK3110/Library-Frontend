@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginService } from './service/login.service';
 import { AuthInterceptor } from './interceptor/auth-interceptor';
@@ -28,12 +28,21 @@ import { AddEditUserModalComponent } from './modals/add-edit-user-modal/add-edit
 import { UploadComponent } from './components/admin/upload/upload.component';
 import { UsersComponent } from './components/admin/users/users.component';
 import { FormatPipe } from './pipe/table/format.pipe';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { FloorComponent } from './components/admin/library/floor/floor.component';
+import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
+import { AddEditFloorModalComponent } from './modals/add-edit-floor-modal/add-edit-floor-modal.component';
+import { AddEditSectionModalComponent } from './modals/add-edit-section-modal/add-edit-section-modal.component';
+import { SectionComponent } from './components/admin/library/section/section.component';
+import { ShelfComponent } from './components/admin/library/shelf/shelf.component';
+import { AddEditShelfComponent } from './modals/add-edit-shelf/add-edit-shelf.component';
+import { LocationComponent } from './components/admin/library/location/location.component';
+import { AddEditLocationModalComponent } from './modals/add-edit-location-modal/add-edit-location-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent,
     NavbarComponent,
     PageNotFoundComponent,
     AdminDashboardComponent,
@@ -43,6 +52,15 @@ import { FormatPipe } from './pipe/table/format.pipe';
     UploadComponent,
     UsersComponent,
     FormatPipe,
+    FloorComponent,
+    DashboardComponent,
+    AddEditFloorModalComponent,
+    AddEditSectionModalComponent,
+    SectionComponent,
+    ShelfComponent,
+    AddEditShelfComponent,
+    LocationComponent,
+    AddEditLocationModalComponent,
 
   ],
   imports: [
@@ -50,6 +68,7 @@ import { FormatPipe } from './pipe/table/format.pipe';
     FormsModule,
     MatSelectModule,
     MatPaginatorModule,
+    MatSidenavModule,
     MatTableModule,
     MatFormFieldModule,
     MatButtonModule,
@@ -64,6 +83,9 @@ import { FormatPipe } from './pipe/table/format.pipe';
     NgbModule
   ],
   providers: [LoginService,[{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor, multi:true}]],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    NO_ERRORS_SCHEMA
+  ]
 })
 export class AppModule { }

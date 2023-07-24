@@ -1,17 +1,1 @@
-<div class="container">
-  <div class="d-flex row justify-content-end me-1 ">
-    <button mat-fab extended class="m-2" (click)="users()">
-      <mat-icon>supervisor_account</mat-icon>
-      Users
-    </button>
-    <button mat-fab extended class="m-2" (click)="lib()">
-      <mat-icon>local_library</mat-icon>
-      Library
-    </button>
-
-  </div>
-  <div class="mt-3">
-    <app-users [Toast]="Toast" *ngIf="isUsers"></app-users>
-    <app-upload [Toast]="Toast" *ngIf="!isUsers"></app-upload>
-  </div>
-</div>
+<app-navbar></app-navbar>

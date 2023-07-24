@@ -54,6 +54,11 @@ export class AuthInterceptor  implements HttpInterceptor{
            
             concatMap((res:any)=>{
                 localStorage.setItem("token",res.token);
+                localStorage.setItem("refreshToken",res.refreshToken);
+                localStorage.setItem("role", res.role);
+                localStorage.setItem("userId", res.userId);
+                console.log(res);
+                
                                       this.tokenRefreshed$.next(true);
                   return next.handle(this.addToken(req));
               }),

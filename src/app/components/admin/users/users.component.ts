@@ -54,6 +54,12 @@ export class UsersComponent {
         this.users = userDto.content;
         this.totalRows = userDto.totalElements;
       }, (error) => {
+        console.log(error);
+        
+        if(error === 'Forbidden'){
+  
+          this.loginService.logoutUser();
+        }
         this.Toast.fire({
           icon: 'error',
           title: 'Something went wrong!!'
@@ -108,7 +114,9 @@ export class UsersComponent {
         }
       }
 
+
     }, (error) => {
+    
       this.Toast.fire({
         icon: 'error',
         title: 'something went wrong'
