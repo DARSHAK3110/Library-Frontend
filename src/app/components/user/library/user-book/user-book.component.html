@@ -1,0 +1,86 @@
+
+    <div class="container-fluid">
+      <h1 class="fw-900 mt-3 ps-2 title">Books</h1>
+      <hr class="title-br p-0" />
+      <div class="row justify-content-end">
+        <div class="col-11">
+          <div class="input-group">
+            <div class="form-outline">
+              <input
+                type="search"
+                id="form1"
+                (blur)="getBooks()"
+                (input)="getBooks()"
+                placeholder="Search by Title or AutherName"
+                name="search"
+                [(ngModel)]="search"
+                class="form-control"
+              />
+            </div>
+            <button type="button" class="btn btn-primary" (click)="getBooks()">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="mt-5">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="index">
+                <th mat-header-cell *matHeaderCellDef> Index </th>
+                <td mat-cell *matCellDef="let element; let i = index;">{{(pageSize*currentPage)+i+1}}</td>
+            </ng-container>
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef> Title </th>
+                <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="author">
+                <th mat-header-cell *matHeaderCellDef> Author name </th>
+                <td mat-cell *matCellDef="let element"> {{element.author}} </td>
+            </ng-container>
+            <ng-container matColumnDef="availableCopies">
+                <th mat-header-cell *matHeaderCellDef> Available copies </th>
+                <td mat-cell *matCellDef="let element"> {{element.availableCopies}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="isbn">
+                <th mat-header-cell *matHeaderCellDef> ISBN </th>
+                <td mat-cell *matCellDef="let element"> {{element.isbn}} </td>
+            </ng-container>
+            <ng-container matColumnDef="totalCopies">
+                <th mat-header-cell *matHeaderCellDef> Total copies</th>
+                <td mat-cell *matCellDef="let element"> {{element.totalCopies}} </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let element"> <span class="location-accordion-item-description">
+                        <button mat-raised-button color="primary" *ngIf="!(element.addedToCart)" class="me-2" (click)="addBookToCart(element.bookDetailsId)">
+                            <mat-icon>add</mat-icon>Add to cart
+                        </button>
+                        <button mat-raised-button color="primary" *ngIf="(element.addedToCart)" class="me-2" [routerLink]="['/user/library/cart']">
+                            <mat-icon>pageview</mat-icon>Show cart
+                        </button>
+                        <button mat-raised-button color="accent" *ngIf="(element.reserved)" class="me-2" [routerLink]="['/user/library/reservation']">
+                            <mat-icon>pageview</mat-icon>Show reservations
+                        </button>
+                        
+                      <button mat-raised-button class="ms-2" *ngIf= "!(element.reserved)" color="accent"(click)="reservationBook(element.bookDetailsId)">
+                        <mat-icon>add</mat-icon>Reserve book
+                    </button>
+                    </span> </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+        </table>
+    
+        <mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
+            [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
+        </mat-paginator>
+    </div>
+    </div>
+
+
+
+
+

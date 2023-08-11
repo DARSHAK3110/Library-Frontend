@@ -14,7 +14,7 @@ import { DataService } from '../service/data.service';
 })
 export class AdminDashboardComponent {
 
-  isUsers = false;
+  isUsers = true;
   Toast: any = Swal.mixin({
     toast: true,
     position: 'top-end',

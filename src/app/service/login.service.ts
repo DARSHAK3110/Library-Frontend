@@ -9,7 +9,7 @@ import { catchError, throwError } from 'rxjs';
 })
 export class LoginService {
   
-  url = "http://localhost:8095/api/v1/users";
+  url = "http://localhost:8090/api/v1/users";
   constructor(private http:HttpClient) {
 
    }
@@ -26,6 +26,7 @@ export class LoginService {
   loginUser(token:string, role:string, refreshToken:string, userId:any){
     localStorage.setItem("token",token);
     localStorage.setItem("role",role);
+    localStorage.setItem("refreshToken",refreshToken);
     localStorage.setItem("userId",userId);
     return true;
   }
@@ -38,11 +39,18 @@ export class LoginService {
     return true;
   }
 
+  isAdmin(){
+    let role = localStorage.getItem("role");
+    if(role === "ADMIN"){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
   logoutUser(){
-    localStorage.removeItem("token");
-    localStorage.removeItem("role");
-    localStorage.removeItem("userId");
-    window.location.href="/login"
+    this.localStorageCleaner();
+     window.location.href="/login"
     return true;
   }
 
@@ -52,10 +60,21 @@ export class LoginService {
 
 
   getRefToken(){
-    let token = String(localStorage.getItem("userId"));
-    localStorage.removeItem("token");
-    let result:any = this.http.post(this.url+"/refresh",token);
+    let token = String(localStorage.getItem("token"));
+    console.log(token);
+    
+    let refreshToken = String(localStorage.getItem("refreshToken"));
+    console.log(refreshToken);
+    
+   this.localStorageCleaner();
+    let result:any = this.http.post(this.url+"/refresh",{"token":token,"refreshToken":refreshToken});
     return result;
   
+  }
+  localStorageCleaner(){
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("refreshToken");
   }
 }

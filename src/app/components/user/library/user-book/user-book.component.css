@@ -1,0 +1,104 @@
+.title-br{
+    border-top: 10px solid purple;
+}
+
+.title{
+    color: blueviolet;
+}
+
+.user-accordion {
+    display: block;
+
+  }
+  .add-btn{
+    width: 100px;
+  }
+  .user-accordion-item {
+    display: block;
+    border: solid 1px #ccc;
+  }
+  
+  .user-accordion-item + .user-accordion-item {
+    border-top: none;
+  }
+  
+  .user-accordion-item-header {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+  }
+  
+  .user-accordion-item-description {
+    font-size: 0.85em;
+    color: #999;
+  }
+  
+  .user-accordion-item-header,
+  .user-accordion-item-body {
+    padding: 16px;
+  }
+  
+  .user-accordion-item-header:hover {
+    cursor: pointer;
+    background-color: #eee;
+  }
+  
+  .user-accordion-item:first-child {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+  
+  .user-accordion-item:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+  
+
+  .menu-right{
+    flex: 1 1 auto;
+}
+.book-container {
+  width: 200px;
+}
+.user-sidebar-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .book-availability-filter {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+  }
+  
+  .book-availability-button {
+    margin: 5px;
+  }
+  .user-is-mobile .user-toolbar {
+    position: fixed;
+    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+    z-index: 2;
+  }
+  
+  
+  .user-sidenav-container {
+    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    flex: 1;
+    height: 100%;
+  }
+  
+  .user-is-mobile .user-sidenav-container {
+    /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+       `<body>` to be our scrolling element for mobile layouts. */
+    flex: 1 0 auto;
+  }
+
+  .nav-container{
+    width: 200px;
+  }

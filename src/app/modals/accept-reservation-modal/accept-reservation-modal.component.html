@@ -1,0 +1,18 @@
+<div>
+    <div class="modal-header">
+      <h4 class="modal-title">Accept Reservations</h4>
+    </div>
+    <div class="modal-body">
+      <div class="div">
+        Are you sure want to accept this request?
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button"
+        class="btn btn-outline-dark"
+        (click)="activeModal.close(false)">Cancel</button>
+      <button type="button"
+        class="btn btn-outline-dark"
+        (click)="acceptReservation()">OK</button>
+    </div>
+  </div>

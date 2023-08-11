@@ -6,7 +6,7 @@ import { catchError, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
-  url: string = String("http://localhost:8095/api/v1/library/");
+  url: string = String("http://localhost:8091/api/v1/library/");
   constructor(private httpClient: HttpClient) {
   }
 
@@ -18,7 +18,6 @@ export class DataService {
 
   fetchData(table: string, pageSize: number, pageNumber: number, uploadId: number) {
     return this.httpClient.get(this.url + table + "s/upload/" + uploadId, { params: new HttpParams().set("pageNumber", pageNumber).set("pageSize", pageSize) }).pipe(catchError(this.handleError));
-
   }
   private handleError(error: HttpErrorResponse) {
     console.log(error);

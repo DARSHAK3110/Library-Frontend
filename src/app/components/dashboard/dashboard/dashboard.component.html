@@ -1,0 +1,174 @@
+<!-- <mat-sidenav-container
+  class="user-sidenav-container"
+  [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+>
+  <mat-sidenav
+    #snav
+    position="end"
+    [mode]="mobileQuery.matches ? 'over' : 'side'"
+    opened
+    [fixedInViewport]="mobileQuery.matches"
+    fixedTopGap="56"
+  >
+    <mat-nav-list>
+      <div mat-list-item class="nav-container  mt-3 ms-2">
+        <label id="book-availability-filter-label "> <span class="fs-5">Filter by availability</span></label>
+        
+        <mat-radio-group name="filter" name="filter"
+        [(ngModel)]="filter">
+          <mat-radio-button (change)="filterChange($event)" class="book-availability-button" color="primary" value="-1" checked="true">Borrowed Books</mat-radio-button>
+          <mat-radio-button (change)="filterChange($event)" class="book-availability-button" color="primary" value="0">All books</mat-radio-button>
+          <mat-radio-button (change)="filterChange($event)" class="book-availability-button" color="primary" value="1">Available Books</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="container-fluid">
+      <h1 class="fw-900 mt-3 ps-2 title">Book:-{{ book.title }}</h1>
+      <hr class="title-br p-0" />
+      <div class="row ">
+        <div class="col-3 my-auto">
+          <div class="sheet">
+            <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="setfileName($event)"
+              accept=".xlsx" />
+            <button mat-flat-button color="primary" (click)="csvInput.click()">Choose File (.xlsx)</button>
+          </div>
+        </div>
+       
+        <div class="col-2 my-auto">
+          <button mat-flat-button color="accent" (click)="submitFile()" [disabled]="!file ">Submit</button>
+        </div>
+        <div class="col-3 my-auto text-success tw-bold ">{{fileName}}</div>
+        <div class="col-4">
+          <div class="row justify-content-end">
+
+            <div class="col-3 justify-content-end">
+              <button class="align-content-end"
+              mat-raised-button
+              color="primary"
+              (click)="addEditBookStatus(0)"
+            >
+              <mat-icon>add</mat-icon>Add
+            </button>  </div>
+<div class="col-4"><button mat-icon-button (click)="snav.toggle()">
+  <mat-icon>filter_list</mat-icon>
+</button></div>  
+          
+           
+          
+          </div>
+    
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <div class="fs-3">Book Details</div>
+        <table class="table">
+          <tbody>
+            <tr>
+              <th scope="row">Title</th>
+              <td>{{ book.title }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Author</th>
+              <td>{{ book.author }}</td>
+            </tr>
+            <tr>
+              <th scope="row">ISBN number</th>
+              <td>{{ book.isbn }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-5">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef>Index</th>
+            <td mat-cell *matCellDef="let element; let i = index">{{(pageSize*currentPage)+i }}</td>
+          </ng-container>
+          
+          <ng-container matColumnDef="floorNo">
+            <th mat-header-cell *matHeaderCellDef>Floor No.</th>
+            <td mat-cell *matCellDef="let element">{{ element.floorNo }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="sectionName">
+            <th mat-header-cell *matHeaderCellDef>Section Name</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.sectionName }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="shelfNo">
+            <th mat-header-cell *matHeaderCellDef>Shelf No</th>
+            <td mat-cell *matCellDef="let element">{{ element.shelfNo }}</td>
+          </ng-container>
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef>Position</th>
+            <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+          </ng-container>
+          <ng-container matColumnDef="isAvailable">
+            <th mat-header-cell *matHeaderCellDef>Available</th>
+            <td mat-cell *matCellDef="let element">
+          
+           <button
+           *ngIf = "element.isAvailable"
+                  mat-raised-button
+                  color="primary"
+                  (click)="checkIn(element.bookStatusId)"
+                >
+                Check in
+          </button>
+          <button
+          *ngIf = "!element.isAvailable"
+                 mat-raised-button
+                 color="accent"
+                 (click)="checkOut(element.bookStatusId)"
+               >
+               Check out
+         </button>
+          </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let element">
+              <span class="location-accordion-item-description">
+                <button
+                  mat-raised-button
+                  color="primary" class="me-2"
+                  (click)="addEditBookStatus(element.bookStatusId)"
+                >
+                  <mat-icon>edit</mat-icon>Edit
+                </button>
+                <button
+                  mat-raised-button
+                  color="accent" class="ms-2"
+                  (click)="deleteBookStatus(element.bookStatusId)"
+                >
+                  <mat-icon>delete</mat-icon>Delete
+                </button>
+              </span>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumns; let i = index"
+          ></tr>
+        </table>
+
+        <mat-paginator
+          #paginator
+          [length]="totalRows"
+          [pageIndex]="currentPage"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          (page)="pageChanged($event)"
+          aria-label="Select page"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->

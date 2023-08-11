@@ -1,0 +1,114 @@
+<div>
+  <div class="modal-header">
+    <h4 class="modal-title">Add/Edit Book</h4>
+  </div>
+
+  <div class="modal-body">
+    <div class="text-danger" *ngIf="isError">*{{ error_msg }}</div>
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          formControlName="title"
+          placeholder="Enter title"
+          name="title"
+          [value]="book.title"
+        />
+        <div *ngIf="fc.title.errors?.required">
+          <div class="text-danger" *ngIf="fc.title.touched && fc.title.invalid">
+            Title required.
+          </div>
+        </div>
+
+          <div
+            *ngIf="
+              !fc.title.errors?.required && fc.title.errors?.maxlength
+            "
+          >
+            <div
+              class="text-danger"
+              *ngIf="fc.title.touched && fc.title.invalid"
+            >
+            Title must be less than 16 letters
+            </div>
+          </div>
+          <div
+            *ngIf="
+              !fc.title.errors?.required &&
+              !fc.title.errors?.maxlength &&
+              fc.title.errors?.NoSpaceValidator
+            "
+          >
+            <div
+              class="text-danger"
+              *ngIf="fc.title.touched && fc.title.invalid"
+            >
+           Title invalid!!!Title not contains space!!!
+            </div>
+          </div>
+      </div>
+<br>
+      <div class="form-group">
+        <mat-form-field>
+          <mat-label>Author</mat-label>
+          <mat-select
+            [(ngModel)]="authorSelected"
+            formControlName="author"
+            name="author"
+          >
+            <mat-option *ngFor="let a of authors" [value]="a.authorId">
+              {{ a.authorName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <label for="isbn">ISBN</label>
+        <input
+          type="number"
+          [ngClass]="!isAdd ? 'disabled' : ''"
+          class="form-control"
+          id="isbn"
+          formControlName="isbn"
+          placeholder="Enter ISBN number"
+          name="ISBN"
+          [value]="book.isbn"
+        />
+        <div *ngIf="fc.isbn.errors?.required">
+          <div class="text-danger" *ngIf="fc.isbn.touched && fc.isbn.invalid">
+            ISBN required.
+          </div>
+        </div>
+        <div *ngIf="!fc.isbn.errors?.required">
+          <div *ngIf="fc.isbn.errors?.phoneNumberValidation">
+            <div class="text-danger" *ngIf="fc.isbn.touched && fc.isbn.invalid">
+              ISBN invalid!!! ISBN must be 13 digits!!!
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          (click)="activeModal.close(false)"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-success"
+          [disabled]="form.invalid"
+          (click)="saveBook()"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div>
+  <div class="modal-header">
+    <h4 class="modal-title">Reservation</h4>
+  </div>
+  <div class="modal-body">
+    <div class="div">
+      <form [formGroup]="form">
+        Are you sure want to reserve this book?
+        <div class="form-group">
+          <label for="reservation-date" class="form-label"
+            >Reservation Date</label
+          >
+          <input
+            type="date"
+            class="form-control"
+            id="reservation-date"
+            formControlName="reservationDate"
+            [class.is-invalid]="
+              (fc.reservationDate?.touched || fc.reservationDate?.dirty) &&
+              fc.reservationDate?.invalid
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              (fc.reservationDate?.touched || fc.reservationDate?.dirty) &&
+              fc.reservationDate?.invalid
+            "
+          >
+            Invalid Date
+          </div>
+        </div>
+        <br />
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            (click)="activeModal.close(false)"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            class="btn btn-success"
+            [disabled]="form.invalid"
+            (click)="saveReservation()"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

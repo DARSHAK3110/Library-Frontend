@@ -57,19 +57,15 @@ export class AddEditUserModalComponent {
       this.user.phoneNumber = phoneNumber;
       this.user.password = password;
     }
-    this.user.role = "USER"
+   
     if(this.user.userId === undefined){
-      
+      this.user.role = "USER"
       this.userService.addUser(this.user).subscribe((res)=>{
         this.activeModal.close(true);
       },
       (error)=>{
         this.isError = true
-        // this.error_msg = error
-        this.Toast.fire({
-          icon: 'error',
-          title: error
-        })
+        this.error_msg = error
       });
 
     }
@@ -79,11 +75,7 @@ export class AddEditUserModalComponent {
       },
       (error)=>{
         this.isError = true
-        // this.error_msg = error
-        this.Toast.fire({
-          icon: 'error',
-          title: error
-        })
+        this.error_msg = error
       });
 
     }

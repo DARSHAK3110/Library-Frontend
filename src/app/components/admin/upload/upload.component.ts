@@ -23,8 +23,6 @@ export class UploadComponent {
   uploadId!: number;
 
   pageChanged(event: PageEvent) {
-    console.log("abcd");
-    
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex;
     this.getData();

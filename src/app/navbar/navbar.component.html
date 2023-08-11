@@ -1,12 +1,38 @@
-   
-      <mat-toolbar color="primary">
-        <mat-toolbar-row>
-          <span   routerLink="/dashboard">Authentication App</span>
-          <span class="menu-right"> </span>
-            <div>
-              <button class="btn btn-warning" (click)="logout()">Logout</button>
-            </div>
-        </mat-toolbar-row>
-        
-       </mat-toolbar>
-     
+ 
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <span routerLink="/dashboard">Authentication App</span>
+    <span class="menu-right"> </span>
+    <div>
+      <button class="btn btn-warning" (click)="logout()">Logout</button>
+    </div>
+  </mat-toolbar-row>
+
+</mat-toolbar>
+  <mat-sidenav-container class="example-sidenav-container " [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" opened [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56">
+      <mat-nav-list>
+        <div class="" *ngIf="role === 'ADMIN'">
+        <div mat-list-item   *ngFor="let nav of adminNav |keyvalue" class="my-3 ms-3">
+          <a routerLink='{{nav.value}}' class="text-decoration-none text-black">
+          <div class="nav-container ">{{nav.key}}</div></a>
+        </div>
+      </div>
+       
+      <div class="" *ngIf="role === 'USER'">
+        <div mat-list-item   *ngFor="let nav of userNav |keyvalue" class="my-3 ms-3">
+          <a routerLink='{{nav.value}}' class="text-decoration-none text-black">
+          <div class="nav-container ">{{nav.key}}</div></a>
+        </div>
+      </div>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

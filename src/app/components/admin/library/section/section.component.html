@@ -1,0 +1,55 @@
+<div class="container-fluid">
+    <h1 class="fw-900 mt-3 ps-2 title">Section</h1>
+    <hr class="title-br p-0">
+    <div class="row">
+        <div class="col-11">
+            <div class="input-group">
+                <div class="form-outline">
+                    <input type="search" id="form1" (blur)="getSections()" (input)="getSections()"
+                        placeholder="Search by sectionNo" name="search" [(ngModel)]="search" class="form-control" />
+                </div>
+                <button type="button" class="btn btn-primary" (click)="getSections()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-1 justify-content-end"><button mat-raised-button color="primary" (click)="addEditSection(0)">
+                <mat-icon>add</mat-icon>Add
+            </button></div>
+    </div>
+    <div class="mt-5">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="index">
+                <th mat-header-cell *matHeaderCellDef> Index </th>
+                <td mat-cell *matCellDef="let element; let i = index;">{{(pageSize*currentPage)+i+1}}</td>
+            </ng-container>
+            <ng-container matColumnDef="floorNo">
+                <th mat-header-cell *matHeaderCellDef> Floor No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.floorNo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="sectionName">
+                <th mat-header-cell *matHeaderCellDef> Section Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.sectionName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let element"> <span class="section-accordion-item-description">
+                        <button class= "me-2" mat-raised-button color="primary" (click)="addEditSection(element.sectionId)">
+                            <mat-icon>edit</mat-icon>Edit
+                        </button>
+                        <button class= "ms-2" mat-raised-button color="accent" (click)="deleteSection(element.sectionId)">
+                            <mat-icon>delete</mat-icon>Delete
+                        </button>
+                    </span> </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+        </table>
+
+        <mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
+            [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
+        </mat-paginator>
+    </div>
+</div>

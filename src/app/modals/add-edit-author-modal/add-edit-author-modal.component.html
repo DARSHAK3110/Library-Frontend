@@ -1,0 +1,113 @@
+<div>
+  <div class="modal-header">
+    <h4 class="modal-title">Add/Edit Author</h4>
+  </div>
+
+  <div class="modal-body">
+    <div class="text-danger" *ngIf="isError">*{{ error_msg }}</div>
+    <form [formGroup]="form">
+      <div class="form-group">
+        <div class="form-group">
+          <label for="authorName">Author name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="author-name"
+            formControlName="authorName"
+            placeholder="Enter author name"
+            name="authorName"
+            value="author.authorName"
+          />
+          <div *ngIf="fc.authorName.errors?.required">
+            <div
+              class="text-danger"
+              *ngIf="fc.authorName.touched && fc.authorName.invalid"
+            >
+              Author name required.
+            </div>
+          </div>
+          <div
+            *ngIf="
+              !fc.authorName.errors?.required && fc.authorName.errors?.minlength
+            "
+          >
+            <div
+              class="text-danger"
+              *ngIf="fc.authorName.touched && fc.authorName.invalid"
+            >
+              Author name must be greater than 3 letters
+            </div>
+          </div>
+
+          <div
+            *ngIf="
+              !fc.authorName.errors?.required && fc.authorName.errors?.maxlength
+            "
+          >
+            <div
+              class="text-danger"
+              *ngIf="fc.authorName.touched && fc.authorName.invalid"
+            >
+              Author name must be less than 16 letters
+            </div>
+          </div>
+          <div
+            *ngIf="
+              !fc.authorName.errors?.required &&
+              !fc.authorName.errors?.maxlength &&
+              !fc.authorName.errors?.minlength &&
+              fc.authorName.errors?.NoSpaceValidator
+            "
+          >
+            <div
+              class="text-danger"
+              *ngIf="fc.authorName.touched && fc.authorName.invalid"
+            >
+              Author name invalid!!!Author name not contains space!!!
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="form-group">
+          <mat-form-field class="author-dob">
+            <mat-label>Author Birth Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              class="form-control"
+              id="author-dob"
+              name="authorDOB"
+              value="author.authorDOB"
+              formControlName="authorDOB"
+            />
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <br />
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            (click)="activeModal.close(false)"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            class="btn btn-success"
+            [disabled]="form.invalid"
+            (click)="saveAuthor()"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

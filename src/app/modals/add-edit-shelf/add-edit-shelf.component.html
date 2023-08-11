@@ -1,0 +1,62 @@
+<div>
+    <div class="modal-header">
+        <h4 class="modal-title">Add/Edit Shelf</h4>
+    </div>
+
+    <div class="modal-body">
+        <div class="text-danger" *ngIf="isError">*{{error_msg}}</div>
+        <form [formGroup]='form'>
+            <div class="form-group">
+
+                <mat-form-field>
+                    <mat-label>Floor</mat-label>
+                    <mat-select [(ngModel)]="floorSelected" formControlName="floorNo" name="floorNo" (selectionChange)="getSelection($event.value)">
+                        <mat-option *ngFor="let f of floors" [value]="f.floorId">
+                            {{f.floorNo}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+
+            <div class="form-group">
+
+                <mat-form-field>
+                    <mat-label>Section Name</mat-label>
+                    <mat-select [(ngModel)]="sectionSelected" formControlName="sectionName" name="sectionName" >
+                        <mat-option *ngFor="let s of sections" [value]="s.sectionId">
+                            {{s.sectionName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+
+
+            <div class="form-group">
+                <label for="shelfNo">Shelf Number</label>
+                <input type="number" class="form-control" id="shelf-no" formControlName="shelfNo"
+                    placeholder="Enter shelf no." name="shelfNo">
+                <div *ngIf="fc.shelfNo.errors?.required">
+                    <div class="text-danger" *ngIf="fc.shelfNo.touched && fc.shelfNo.invalid">
+                        Shelf no. required.
+                    </div>
+                </div>
+                <div *ngIf="!fc.shelfNo.errors?.required">
+                    <div *ngIf="fc.shelfNo.errors?.minCheckerValidation">
+                        <div class="text-danger" *ngIf="fc.shelfNo.touched && fc.shelfNo.invalid">
+                            Shelf no. invalid!!! it's must be greater than -1 !!!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="activeModal.close(false)">Cancel</button>
+                <button type="button" class="btn btn-success" [disabled]="form.invalid"
+                    (click)="saveShelf()">Submit</button>
+            </div>
+        </form>
+
+    </div>

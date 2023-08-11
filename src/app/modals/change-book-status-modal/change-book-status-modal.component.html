@@ -1,0 +1,71 @@
+<div>
+    <div class="modal-header">
+        <h4 class="modal-title">Edit Book Location</h4>
+    </div>
+
+    <div class="modal-body">
+        <div class="text-danger" *ngIf="isError">*{{error_msg}}</div>
+        <form [formGroup]='form'>
+            <div class="form-group">
+
+                <mat-form-field>
+                    <mat-label>Floor</mat-label>
+                    <mat-select [(ngModel)]="floorSelected" formControlName="floorNo" name="floorNo" (selectionChange)="getSectionByFloor($event.value)">
+                        <mat-option *ngFor="let f of floors" [value]="f.floorId">
+                            {{f.floorNo}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+
+            <div class="form-group">
+
+                <mat-form-field>
+                    <mat-label>Section Name</mat-label>
+                    <mat-select [(ngModel)]="sectionSelected" formControlName="sectionName" name="sectionName" (selectionChange)="getShelfBySection($event.value)" >
+                        <mat-option *ngFor="let s of sections" [value]="s.sectionId">
+                            {{s.sectionName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+            <div class="form-group">
+
+                <mat-form-field>
+                    <mat-label>Shelf number</mat-label>
+                    <mat-select [(ngModel)]="shelfSelected" formControlName="shelfNo" name="shelfNo" (selectionChange)="getLocationByShelf($event.value)" >
+                        <mat-option *ngFor="let s of shelfs" [value]="s.shelfId">
+                            {{s.shelfNo}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+            <div class="form-group">
+
+                <mat-form-field>
+                    <mat-label>Position</mat-label>
+                    <mat-select [(ngModel)]="positionSelected" formControlName="position" name="position" >
+                        <mat-option  *ngIf="location.locationId>0" [selected] [value]="location.locationId">
+                            {{location.position}}
+                        </mat-option>
+                        <mat-option *ngFor="let p of positions" [value]="p.locationId">
+                            {{p.position}}
+                        </mat-option>
+
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+            <br>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="activeModal.close(false)">Cancel</button>
+                <button type="button" class="btn btn-success" [disabled]="form.invalid"
+                    (click)="savePosition()">Submit</button>
+            </div>
+        </form>
+
+    </div>

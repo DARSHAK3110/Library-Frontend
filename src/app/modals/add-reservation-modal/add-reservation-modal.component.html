@@ -1,0 +1,58 @@
+<div>
+    <div class="modal-header">
+        <h4 class="modal-title">Add Reservation</h4>
+    </div>
+    
+    <div class="modal-body">
+        <div class="text-danger" *ngIf="isError">*{{error_msg}}</div>
+        <form [formGroup]='form'>
+            <div class="row">
+                <div class="col-8">
+                    <div class="form-group" >
+                        <label for="reserver-phone-number">Phone number:<span *ngIf = "isReserverCheked" class="text-success">User Granted</span><span *ngIf = "!isReserverCheked" class="text-danger">User must check first!!</span></label>
+                        <input type="tel" class="form-control" id="reserver-phone-number" formControlName="reserverPhoneNumber"
+                            placeholder="Enter phone number" name="reserverPhoneNumber" value="reserver.phoneNumber">
+                                    <div *ngIf="fc.reserverPhoneNumber.errors?.required">     
+                        <div class="text-danger" *ngIf="fc.reserverPhoneNumber.touched && fc.reserverPhoneNumber.invalid">
+                            Phone number required.
+                        </div>
+                        </div>
+                                    <div *ngIf="!fc.reserverPhoneNumber.errors?.required">
+                        <div *ngIf="fc.reserverPhoneNumber.errors?.phoneNumberValidation">
+                            <div class="text-danger" *ngIf="fc.reserverPhoneNumber.touched && fc.reserverPhoneNumber.invalid">
+                            Phone number invalid!!! Phone number must be 10 digits!!!
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                </div>
+                <div class="col-4 mt-4">
+                    <button type="button" class="btn btn-success" [disabled]="fc.reserverPhoneNumber.invalid"
+                    (click)="checkUser()">Check User</button>
+                </div>
+            </div>
+            
+
+                <div class="form-group" >
+                    <label for="reservation-date" class="form-label">Reservation Date</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="reservation-date"
+                      formControlName="reservationDate"
+                      [class.is-invalid]="(fc.reservationDate?.touched || fc.reservationDate?.dirty) && fc.reservationDate?.invalid"
+                    />
+                    <div class="invalid-feedback" *ngIf="(fc.reservationDate?.touched || fc.reservationDate?.dirty) && fc.reservationDate?.invalid">
+                      Invalid Date
+                    </div>
+                  </div>
+            <br>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="activeModal.close(false)">Cancel</button>
+                <button type="button" class="btn btn-success" [disabled]="form.invalid || !isReserverCheked"
+                    (click)="saveReservation()">Submit</button>
+            </div>
+        </form>
+
+    </div>

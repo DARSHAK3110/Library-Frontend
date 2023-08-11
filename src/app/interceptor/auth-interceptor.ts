@@ -14,12 +14,23 @@ export class AuthInterceptor  implements HttpInterceptor{
    
          return next.handle(this.addToken(req)).pipe(
             catchError(err=>{
-                let errorMsg = String(err.error.message);
-                if(errorMsg.startsWith("JWT expired")){
+                
+                if(err.status === 401){
                     return this.handleJwtexpiration(req,next);
                 }
-            
-            return throwError(errorMsg);
+            if(err.error.message != null){
+                return throwError(err.error.message);
+            }
+            else{
+                let e = err.error.result;
+                let error_msg = "abcd";
+                for (const key in e) {
+                    error_msg = `${error_msg}`+"\n"+`${key}- ${e[key]}`
+                }
+                
+                return throwError(error_msg );
+            }
+           
         })
          );
     }
@@ -54,6 +65,11 @@ export class AuthInterceptor  implements HttpInterceptor{
            
             concatMap((res:any)=>{
                 localStorage.setItem("token",res.token);
+                localStorage.setItem("refreshToken",res.refreshToken);
+                localStorage.setItem("role", res.role);
+                localStorage.setItem("userId", res.userId);
+                console.log(res);
+                
                                       this.tokenRefreshed$.next(true);
                   return next.handle(this.addToken(req));
               }),

@@ -1,5 +1,6 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { take } from 'rxjs';
 import { DataService } from 'src/app/service/data.service';
 import { LoginService } from 'src/app/service/login.service';
@@ -13,9 +14,9 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class UsersComponent {
 
-  displayedColumns: string[] = ['FirstName', 'LastName', 'PhoneNumber', 'Role'];
+  displayedColumns: string[] = ['firstName', 'lastName', 'phoneNumber','role', 'actions'];
   users: any;
-
+  dataSource:any;
  
   
   searchFirst: string = "";
@@ -33,14 +34,10 @@ export class UsersComponent {
 
   @Input() Toast:any;
   constructor(private userService: UserService, private loginService: LoginService, private modalService: ModalService,private dataService: DataService) {
-
     this.getUsers()
-
   }
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
-
-
 
   pageChanged(event: PageEvent) {
     this.pageSize = event.pageSize;
@@ -52,8 +49,13 @@ export class UsersComponent {
     this.userService.getUsers(this.currentPage, this.pageSize, this.searchFirst, this.searchLast, this.searchPhone).subscribe(
       (userDto: any) => {
         this.users = userDto.content;
+        this.dataSource = new MatTableDataSource(userDto.content);
         this.totalRows = userDto.totalElements;
       }, (error) => {
+        console.log(error);
+        if(error === 'Forbidden'){
+          this.loginService.logoutUser();
+        }
         this.Toast.fire({
           icon: 'error',
           title: 'Something went wrong!!'
@@ -66,14 +68,12 @@ export class UsersComponent {
   deleteUser(phoneNumber: number) {
     this.modalService.onDelete("Are you sure delete this user?", "DeleteUser").pipe(take(1)).subscribe(result => {
       if (result === true) {
-
         this.userService.deleteUser(phoneNumber).subscribe((result => {
           this.Toast.fire({
             icon: 'success',
             title: 'Successfully deleted'
           });
           this.getUsers();
-
         }))
 
       }
@@ -89,9 +89,7 @@ export class UsersComponent {
 
 
   addEditUser(phoneNumber: number) {
-
     this.modalService.onAddEdit(phoneNumber).pipe(take(1)).subscribe(result => {
-
       if (result === true) {
         this.getUsers();
         if (phoneNumber == 0) {
@@ -107,14 +105,12 @@ export class UsersComponent {
           })
         }
       }
-
     }, (error) => {
+    
       this.Toast.fire({
         icon: 'error',
         title: 'something went wrong'
       })
     })
-
   }
-
 }

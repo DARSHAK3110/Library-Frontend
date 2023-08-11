@@ -1,0 +1,58 @@
+<div>
+    <div class="modal-header">
+        <h4 class="modal-title">Check in</h4>
+    </div>
+    
+    <div class="modal-body">
+        <div class="text-danger" *ngIf="isError">*{{error_msg}}</div>
+        <form [formGroup]='form'>
+            <div class="row">
+                <div class="col-8">
+                    <div class="form-group" >
+                        <label for="borrower-phone-number">Phone number:<span *ngIf = "isBorrowerCheked" class="text-success">User Granted</span><span *ngIf = "!isBorrowerCheked" class="text-danger">User must check first!!</span></label>
+                        <input type="tel" class="form-control" id="borrower-phone-number" formControlName="borrowerPhoneNumber"
+                            placeholder="Enter phone number" name="borrowerPhoneNumber" value="borrower.phoneNumber">
+                                    <div *ngIf="fc.borrowerPhoneNumber.errors?.required">     
+                        <div class="text-danger" *ngIf="fc.borrowerPhoneNumber.touched && fc.borrowerPhoneNumber.invalid">
+                            Phone number required.
+                        </div>
+                        </div>
+                                    <div *ngIf="!fc.borrowerPhoneNumber.errors?.required">
+                        <div *ngIf="fc.borrowerPhoneNumber.errors?.phoneNumberValidation">
+                            <div class="text-danger" *ngIf="fc.borrowerPhoneNumber.touched && fc.borrowerPhoneNumber.invalid">
+                            Phone number invalid!!! Phone number must be 10 digits!!!
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                </div>
+                <div class="col-4 mt-4">
+                    <button type="button" class="btn btn-success" [disabled]="fc.borrowerPhoneNumber.invalid"
+                    (click)="checkUser()">Check User</button>
+                </div>
+            </div>
+            
+
+                <div class="form-group" >
+                    <label for="borrowing-date" class="form-label">Borrowing Date</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="borrowing-date"
+                      formControlName="borrowingDate"
+                      [class.is-invalid]="(fc.borrowingDate?.touched || fc.borrowingDate?.dirty) && fc.borrowingDate?.invalid"
+                    />
+                    <div class="invalid-feedback" *ngIf="(fc.borrowingDate?.touched || fc.borrowingDate?.dirty) && fc.borrowingDate?.invalid">
+                      Invalid Date
+                    </div>
+                  </div>
+            <br>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="activeModal.close(false)">Cancel</button>
+                <button type="button" class="btn btn-success" [disabled]="form.invalid || !isBorrowerCheked"
+                    (click)="checkedIn()">Submit</button>
+            </div>
+        </form>
+
+    </div>
