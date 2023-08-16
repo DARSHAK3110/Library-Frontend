@@ -3,7 +3,7 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-    <span routerLink="/dashboard">Authentication App</span>
+    <span routerLink="/{{userType}}">Authentication App</span>
     <span class="menu-right"> </span>
     <div>
       <button class="btn btn-warning" (click)="logout()">Logout</button>
@@ -16,16 +16,16 @@
       fixedTopGap="56">
       <mat-nav-list>
         <div class="" *ngIf="role === 'ADMIN'">
-        <div mat-list-item   *ngFor="let nav of adminNav |keyvalue" class="my-3 ms-3">
+        <div mat-list-item   *ngFor="let nav of adminNav |keyvalue" class=" p-2 my-3 ms-3">
           <a routerLink='{{nav.value}}' class="text-decoration-none text-black">
           <div class="nav-container ">{{nav.key}}</div></a>
         </div>
       </div>
        
       <div class="" *ngIf="role === 'USER'">
-        <div mat-list-item   *ngFor="let nav of userNav |keyvalue" class="my-3 ms-3">
+        <div mat-list-item   *ngFor="let nav of userNav |keyvalue"  class="p-2 my-3 ms-3">
           <a routerLink='{{nav.value}}' class="text-decoration-none text-black">
-          <div class="nav-container ">{{nav.key}}</div></a>
+          <div class="  nav-container ">{{nav.key}}</div></a>
         </div>
       </div>
       </mat-nav-list>

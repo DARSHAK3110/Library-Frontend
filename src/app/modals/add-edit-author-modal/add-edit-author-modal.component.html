@@ -51,21 +51,7 @@
               Author name must be less than 16 letters
             </div>
           </div>
-          <div
-            *ngIf="
-              !fc.authorName.errors?.required &&
-              !fc.authorName.errors?.maxlength &&
-              !fc.authorName.errors?.minlength &&
-              fc.authorName.errors?.NoSpaceValidator
-            "
-          >
-            <div
-              class="text-danger"
-              *ngIf="fc.authorName.touched && fc.authorName.invalid"
-            >
-              Author name invalid!!!Author name not contains space!!!
-            </div>
-          </div>
+          
         </div>
         <br />
         <div class="form-group">

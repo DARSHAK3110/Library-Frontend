@@ -10,6 +10,7 @@ import { catchError, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class BookService {
+
  
   url: string = String("http://localhost:8091/library/api/v1");
   constructor(private httpClient: HttpClient) {
@@ -122,7 +123,11 @@ export class BookService {
   }
 
   getReservations(currentPage: number, pageSize: number, search: string) {
-    return this.httpClient.get(`${this.url}/reservations`, { params: new HttpParams().set("search", search).set("pageSize", pageSize).set("pageNumber", currentPage) });
+    return this.httpClient.get(`${this.url}/reservations`, { params: new HttpParams().set("search", search).set("pageSize", pageSize).set("pageNumber", currentPage).set("user",false) });
+  }
+
+  getReservationsByUser(currentPage: number, pageSize: number, search: string) {
+    return this.httpClient.get(`${this.url}/reservations`, { params: new HttpParams().set("search", search).set("pageSize", pageSize).set("pageNumber", currentPage).set("user",true) });
   }
 
   rejectReservation(id: any) {
@@ -133,7 +138,11 @@ export class BookService {
     return this.httpClient.post(`${this.url}/reservations/status/${id}`,true);
   }
   getBorrowings(currentPage: number, pageSize: number, search: string) {
-    return this.httpClient.get(`${this.url}/borrowings`, { params: new HttpParams().set("search", search).set("pageSize", pageSize).set("pageNumber", currentPage) });
+    return this.httpClient.get(`${this.url}/borrowings`, { params: new HttpParams().set("search", search).set("user",false).set("pageSize", pageSize).set("pageNumber", currentPage) });
+  }
+
+  getBorrowingsByUser(currentPage: number, pageSize: number, search: string) {
+    return this.httpClient.get(`${this.url}/borrowings`, { params: new HttpParams().set("search", search).set("user",true).set("pageSize", pageSize).set("pageNumber", currentPage) });
   }
   deleteBookFromCart(id: any) {
     return this.httpClient.delete(`${this.url}/cart/cartitem/${id}`);

@@ -13,7 +13,7 @@ import { ModalService } from 'src/app/service/modal.service';
   styleUrls: ['./book.component.css']
 })
 export class BookComponent {
-  displayedColumns: string[] = ['index', 'title', 'author', 'isbn', 'availableCopies','totalCopies','actions'];
+  displayedColumns: string[] = ['index', 'title', 'author', 'isbn', 'availableCopies','totalCopies','totalReserved','acceptedReserved','actions'];
   books: any;
   dataSource: any;
 
@@ -45,6 +45,7 @@ export class BookComponent {
     this.bookService.getBooks(this.currentPage, this.pageSize, this.search).subscribe(
       (locationDto: any) => {
         this.books = locationDto.content;
+        
         this.dataSource = new MatTableDataSource(locationDto.content);
         this.totalRows = locationDto.totalElements;
       }, (error) => {
@@ -71,6 +72,7 @@ export class BookComponent {
 
   reservationBook(bookDetailsId: number){
      this.modalService.onAddReservation(bookDetailsId).pipe(take(1)).subscribe(result => {
+      this.getBooks();
     }
 , (error) => {
       console.log(error);

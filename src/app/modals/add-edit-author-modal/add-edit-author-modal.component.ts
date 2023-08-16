@@ -76,7 +76,7 @@ export class AddEditAuthorModalComponent {
   }
   buildForm() {
     this.form = this.formBuilder.group({
-      authorName: ['', [Validators.required, Validators.minLength(3),Validators.maxLength(16), NoSpaceValidator.noSpaceValidators]],
+      authorName: ['', [Validators.required, Validators.minLength(3),Validators.maxLength(16)]],
       authorDOB: ['', [Validators.required]]
     });
 

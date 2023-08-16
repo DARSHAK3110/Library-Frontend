@@ -64,6 +64,7 @@ export class UserBookComponent {
 
   reservationBook(bookDetailsId: number) {
     this.modalService.onAddReservationByUser(bookDetailsId).pipe(take(1)).subscribe(result => {
+      this.getBooks();
     }
       , (error) => {
         console.log(error);

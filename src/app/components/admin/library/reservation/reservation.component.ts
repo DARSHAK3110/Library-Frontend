@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./reservation.component.css']
 })
 export class ReservationComponent {
-  displayedColumns: string[] = ['index','reserver','title', 'reservationDate','actions'];
+  displayedColumns: string[] = ['index','reserver','title','totalCopies','totalReserved','availableCopies','acceptedReserved', 'reservationDate','actions'];
   reservations: any;
   dataSource: any;
 

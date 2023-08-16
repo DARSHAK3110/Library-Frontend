@@ -43,6 +43,27 @@
         <th mat-header-cell *matHeaderCellDef>Book</th>
         <td mat-cell *matCellDef="let element">{{ element.bookTitle }}</td>
       </ng-container>
+
+      <ng-container matColumnDef="totalCopies">
+        <th mat-header-cell *matHeaderCellDef>Total Copies</th>
+        <td mat-cell *matCellDef="let element">{{ element.totalCopies }}</td>
+      </ng-container>
+      <ng-container matColumnDef="availableCopies">
+        <th mat-header-cell *matHeaderCellDef>Available copies</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.availablCopies }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="totalReserved">
+        <th mat-header-cell *matHeaderCellDef>Total reserved</th>
+        <td mat-cell *matCellDef="let element">{{ element.totalRequest }}</td>
+      </ng-container>
+      <ng-container matColumnDef="acceptedReserved">
+        <th mat-header-cell *matHeaderCellDef>Accepted reserved</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.accptedRequest }}
+        </td>
+      </ng-container>
       <ng-container matColumnDef="reservationDate">
         <th mat-header-cell *matHeaderCellDef>Reservation Date</th>
         <td mat-cell *matCellDef="let element">
@@ -71,11 +92,15 @@
             </button>
           </div>
           <div class="" *ngIf="element.isAccepted != null">
-            <span class="fw-800 text-success" *ngIf="element.isAccepted">Accepted</span>
-            <span  class="fw-800 text-danger" *ngIf="!element.isAccepted">Rejected</span>
+            <span class="fw-800 text-success" *ngIf="element.isAccepted"
+              >Accepted</span
+            >
+            <span class="fw-800 text-danger" *ngIf="!element.isAccepted"
+              >Rejected</span
+            >
           </div>
-          </td>
-         </ng-container>
+        </td>
+      </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr

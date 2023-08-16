@@ -40,8 +40,7 @@ export class UserReservationComponent {
     }
   })
   constructor(private bookService: BookService,private locationService: LocationService,changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private modalService: ModalService) {
-    this.getReservations();
-    
+    this.getReservations(); 
   }
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -53,9 +52,8 @@ export class UserReservationComponent {
   }
 
   getReservations() {
-    this.bookService.getReservations(this.currentPage, this.pageSize, this.search).subscribe(
+    this.bookService.getReservationsByUser(this.currentPage, this.pageSize, this.search).subscribe(
       (reservationDto: any) => {
-        console.log(reservationDto.content);
         
         this.reservations = reservationDto.content;
         this.dataSource = new MatTableDataSource(reservationDto.content);

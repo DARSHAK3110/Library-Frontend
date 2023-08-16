@@ -23,7 +23,7 @@ export class AuthInterceptor  implements HttpInterceptor{
             }
             else{
                 let e = err.error.result;
-                let error_msg = "abcd";
+                let error_msg = "";
                 for (const key in e) {
                     error_msg = `${error_msg}`+"\n"+`${key}- ${e[key]}`
                 }
@@ -68,9 +68,6 @@ export class AuthInterceptor  implements HttpInterceptor{
                 localStorage.setItem("refreshToken",res.refreshToken);
                 localStorage.setItem("role", res.role);
                 localStorage.setItem("userId", res.userId);
-                console.log(res);
-                
-                                      this.tokenRefreshed$.next(true);
                   return next.handle(this.addToken(req));
               }),
              

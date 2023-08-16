@@ -9,14 +9,13 @@ import { ModalService } from 'src/app/service/modal.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-borrowing',
-  templateUrl: './borrowing.component.html',
-  styleUrls: ['./borrowing.component.css']
+  selector: 'app-user-borrowing',
+  templateUrl: './user-borrowing.component.html',
+  styleUrls: ['./user-borrowing.component.css']
 })
-export class BorrowingComponent {
- 
-  
-    displayedColumns: string[] = ['index','borrower','title', 'borrowingDate', 'returnDate'];
+export class UserBorrowingComponent {
+
+  displayedColumns: string[] = ['index','title', 'borrowingDate', 'returnDate'];
     reservations: any;
     dataSource: any;
   
@@ -28,8 +27,6 @@ export class BorrowingComponent {
     pageSize = 2;
     currentPage = 0;
     pageSizeOptions: number[] = [2, 5, 10];
-  
-   
   
     Toast: any = Swal.mixin({
       toast: true,
@@ -56,8 +53,8 @@ export class BorrowingComponent {
     }
   
     getBorrowings() {
-      this.bookService.getBorrowings(this.currentPage, this.pageSize, this.search).subscribe(
-        (borrowingDto: any) => {
+      this.bookService.getBorrowingsByUser(this.currentPage, this.pageSize, this.search).subscribe(
+        (borrowingDto: any) => {  
           this.reservations = borrowingDto.content;
           this.dataSource = new MatTableDataSource(borrowingDto.content);
           this.totalRows = borrowingDto.totalElements;

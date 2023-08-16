@@ -33,6 +33,8 @@ export class LoginService {
 
   isLoggedIn(){
     let token = localStorage.getItem("token");
+    console.log(token);
+    
     if(token == null || token == undefined ||token === '' ){
       return false;
     }

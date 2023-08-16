@@ -35,20 +35,6 @@
             Title must be less than 16 letters
             </div>
           </div>
-          <div
-            *ngIf="
-              !fc.title.errors?.required &&
-              !fc.title.errors?.maxlength &&
-              fc.title.errors?.NoSpaceValidator
-            "
-          >
-            <div
-              class="text-danger"
-              *ngIf="fc.title.touched && fc.title.invalid"
-            >
-           Title invalid!!!Title not contains space!!!
-            </div>
-          </div>
       </div>
 <br>
       <div class="form-group">

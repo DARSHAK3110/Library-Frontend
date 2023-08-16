@@ -99,7 +99,7 @@ export class AddEditBookComponent {
 
   buildForm() {
     this.form = this.formBuilder.group({
-      title: ['', [Validators.required, Validators.maxLength(16) ,NoSpaceValidator.noSpaceValidators]],
+      title: ['', [Validators.required, Validators.maxLength(16)]],
       author: ['', [Validators.required,Validators.min(0)]],
       isbn: ['', [Validators.required, Validators.min(1000000000000), Validators.max(9999999999999), isbnValidator.isbnValidations]],
     });
