@@ -63,11 +63,15 @@ export class LoginService {
 
   getRefToken(){
     let token = String(localStorage.getItem("token"));
+<<<<<<< HEAD
     console.log(token);
     
     let refreshToken = String(localStorage.getItem("refreshToken"));
     console.log(refreshToken);
     
+=======
+    let refreshToken = String(localStorage.getItem("refreshToken"));
+>>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
    this.localStorageCleaner();
     let result:any = this.http.post(this.url+"/refresh",{"token":token,"refreshToken":refreshToken});
     return result;

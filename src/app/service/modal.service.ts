@@ -6,6 +6,7 @@ import { AddEditUserModalComponent } from '../modals/add-edit-user-modal/add-edi
 import { AddEditFloorModalComponent } from '../modals/add-edit-floor-modal/add-edit-floor-modal.component';
 import { AddEditSectionModalComponent } from '../modals/add-edit-section-modal/add-edit-section-modal.component';
 import { AddEditShelfComponent } from '../modals/add-edit-shelf/add-edit-shelf.component';
+<<<<<<< HEAD
 import { AddEditLocationModalComponent } from '../modals/add-edit-location-modal/add-edit-location-modal.component';
 import { AddEditAuthorModalComponent } from '../modals/add-edit-author-modal/add-edit-author-modal.component';
 import { AddEditBookComponent } from '../modals/add-edit-book/add-edit-book.component';
@@ -23,6 +24,8 @@ import { AddBookReservationByUserModalComponent } from '../modals/add-book-reser
 import { RemoveBookFromCartModalComponent } from '../modals/remove-book-from-cart-modal/remove-book-from-cart-modal.component';
 import { AcceptReservationModalComponent } from '../modals/accept-reservation-modal/accept-reservation-modal.component';
 import { RejectReservationModalComponent } from '../modals/reject-reservation-modal/reject-reservation-modal.component';
+=======
+>>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
 
 @Injectable({
   providedIn: 'root'
@@ -208,6 +211,33 @@ export class ModalService {
     const modal = this.ngbModal.open(RejectReservationModalComponent);
     modal.componentInstance.reservationId = reservationId;
     return from(modal.result).pipe(catchError(error => {
+      return of(error);
+    }))
+  }
+
+  onAddEditFloor(floorId: number): Observable<boolean>{
+    
+    const modal = this.ngbModal.open(AddEditFloorModalComponent);
+    modal.componentInstance.floorId = floorId;
+    return from(modal.result).pipe(catchError(error=>{
+      return of(error);
+    }))
+  }
+
+  onAddEditSection(sectionId: number): Observable<boolean>{
+    
+    const modal = this.ngbModal.open(AddEditSectionModalComponent);
+    modal.componentInstance.sectionId = sectionId;
+    return from(modal.result).pipe(catchError(error=>{
+      return of(error);
+    }))
+  }
+
+  onAddEditShelf(shelfId: number): Observable<boolean>{
+    
+    const modal = this.ngbModal.open(AddEditShelfComponent);
+    modal.componentInstance.shelfId = shelfId;
+    return from(modal.result).pipe(catchError(error=>{
       return of(error);
     }))
   }

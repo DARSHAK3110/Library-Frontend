@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -5,6 +6,9 @@ import { Location } from 'src/app/model/location';
 import { LocationService } from 'src/app/service/location.service';
 import { NoSpaceValidator } from 'src/app/validator/noSpace.validator';
 import Swal from 'sweetalert2';
+=======
+import { Component } from '@angular/core';
+>>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
 
 @Component({
   selector: 'app-add-edit-location-modal',
@@ -12,6 +16,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-edit-location-modal.component.css']
 })
 export class AddEditLocationModalComponent {
+<<<<<<< HEAD
   id: any;
   isError!: boolean;
   floorSelected: any;
@@ -177,5 +182,7 @@ export class AddEditLocationModalComponent {
 
 
   }
+=======
+>>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
 
 }

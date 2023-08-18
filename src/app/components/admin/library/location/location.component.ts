@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -6,6 +7,9 @@ import { take } from 'rxjs';
 import { BookService } from 'src/app/service/book.service';
 import { LocationService } from 'src/app/service/location.service';
 import { ModalService } from 'src/app/service/modal.service';
+=======
+import { Component } from '@angular/core';
+>>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
 
 @Component({
   selector: 'app-location',
@@ -13,6 +17,7 @@ import { ModalService } from 'src/app/service/modal.service';
   styleUrls: ['./location.component.css']
 })
 export class LocationComponent {
+<<<<<<< HEAD
   displayedColumns: string[] = ['index', 'floorNo', 'sectionName', 'shelfNo', 'position', 'actions'];
   locations: any;
   dataSource: any;
@@ -77,4 +82,7 @@ export class LocationComponent {
       console.log(error);
     })
   }
+=======
+
+>>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
 }

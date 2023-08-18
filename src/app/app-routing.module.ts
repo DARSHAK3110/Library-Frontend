@@ -7,6 +7,7 @@ import { loginPageGuard } from './guard/login-page.guard';
 import { FloorComponent } from './components/admin/library/floor/floor.component';
 import { roleGuard } from './guard/role.guard';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+<<<<<<< HEAD
 import { UsersComponent } from './components/admin/users/users.component';
 import { SectionComponent } from './components/admin/library/section/section.component';
 import { ShelfComponent } from './components/admin/library/shelf/shelf.component';
@@ -55,6 +56,24 @@ const routes: Routes = [
       { path: "library/contact", component: ContactUsComponent, canActivate: [userRoleGuard] },
       { path: "library/borrowing", component: UserBorrowingComponent, canActivate: [userRoleGuard] }
 
+=======
+import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
+import { User } from './model/user';
+import { UsersComponent } from './components/admin/users/users.component';
+import { SectionComponent } from './components/admin/library/section/section.component';
+import { ShelfComponent } from './components/admin/library/shelf/shelf.component';
+const routes: Routes = [
+ 
+  {
+    path:"admin",
+    component: AdminDashboardComponent,
+    canActivate: [loginGuard],
+    children: [
+     {path:"", component: UsersComponent, canActivate: [roleGuard]},
+     {path:"library/floor", component: FloorComponent, canActivate: [roleGuard]},
+     {path:"library/section", component: SectionComponent, canActivate: [roleGuard]},
+     {path:"library/shelf", component: ShelfComponent, canActivate: [roleGuard]}
+>>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
     ]
   },
   {
@@ -63,6 +82,7 @@ const routes: Routes = [
     canActivate: [loginPageGuard],
     pathMatch: "full"
   },
+<<<<<<< HEAD
   {
     path: "",
     component: PageNotFoundComponent,
@@ -70,6 +90,14 @@ const routes: Routes = [
   },
   {
     path: "**",
+=======
+  { path: "", 
+    redirectTo: "/dashboard",
+    pathMatch: "full" },
+ 
+  
+  { path: "**",
+>>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
     component: PageNotFoundComponent
   },
 ];

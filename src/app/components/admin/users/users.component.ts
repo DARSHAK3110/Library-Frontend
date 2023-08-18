@@ -53,7 +53,13 @@ export class UsersComponent {
         this.totalRows = userDto.totalElements;
       }, (error) => {
         console.log(error);
+<<<<<<< HEAD
         if(error === 'Forbidden'){
+=======
+        
+        if(error === 'Forbidden'){
+  
+>>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
           this.loginService.logoutUser();
         }
         this.Toast.fire({
@@ -105,6 +111,11 @@ export class UsersComponent {
           })
         }
       }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
     }, (error) => {
     
       this.Toast.fire({

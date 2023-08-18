@@ -21,7 +21,11 @@
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="index">
                 <th mat-header-cell *matHeaderCellDef> Index </th>
+<<<<<<< HEAD
                 <td mat-cell *matCellDef="let element; let i = index;">{{(pageSize*currentPage)+i+1}}</td>
+=======
+                <td mat-cell *matCellDef="let element; let i = index;">{{i}}</td>
+>>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
             </ng-container>
             <ng-container matColumnDef="floorNo">
                 <th mat-header-cell *matHeaderCellDef> Floor No. </th>
@@ -36,12 +40,19 @@
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef> Action </th>
                 <td mat-cell *matCellDef="let element"> <span class="section-accordion-item-description">
+<<<<<<< HEAD
                         <button class= "me-2" mat-raised-button color="primary" (click)="addEditSection(element.sectionId)">
                             <mat-icon>edit</mat-icon>Edit
                         </button>
                         <button class= "ms-2" mat-raised-button color="accent" (click)="deleteSection(element.sectionId)">
                             <mat-icon>delete</mat-icon>Delete
                         </button>
+=======
+                        <button mat-raised-button color="primary" (click)="addEditSection(element.sectionId)">
+                            <mat-icon>edit</mat-icon>Edit
+                        </button>
+
+>>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
                     </span> </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

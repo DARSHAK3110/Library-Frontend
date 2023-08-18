@@ -68,6 +68,12 @@ export class AuthInterceptor  implements HttpInterceptor{
                 localStorage.setItem("refreshToken",res.refreshToken);
                 localStorage.setItem("role", res.role);
                 localStorage.setItem("userId", res.userId);
+<<<<<<< HEAD
+=======
+                console.log(res);
+                
+                                      this.tokenRefreshed$.next(true);
+>>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
                   return next.handle(this.addToken(req));
               }),
              

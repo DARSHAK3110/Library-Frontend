@@ -18,6 +18,7 @@
                 <mat-icon>add</mat-icon>Add
             </button></div>
     </div>
+<<<<<<< HEAD
     <div class="mt-5">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="index">
@@ -43,6 +44,23 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
         </table>
 
+=======
+
+    <cdk-accordion class="floor-accordion mt-2">
+        <cdk-accordion-item *ngFor="let floor of floors; let i = index;" #accordionItem="cdkAccordionItem"
+            class="floor-accordion-item" role="button" tabindex="0" [attr.id]="'accordion-header-' + i"
+            [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + i">
+            <div class="floor-accordion-item-header">
+                {{ floor.floorNo }}
+                <span class="floor-accordion-item-description">
+                    <button mat-raised-button color="primary" (click)="addEditFloor(floor.floorId)">
+                        <mat-icon>edit</mat-icon>Edit
+                    </button>
+                </span>
+            </div>
+</cdk-accordion-item>
+    </cdk-accordion>
+>>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
     <mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
         [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
     </mat-paginator>
