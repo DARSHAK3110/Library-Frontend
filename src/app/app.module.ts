@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {
@@ -6,22 +5,6 @@ import {
   NgModule
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-=======
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA
-} from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { NavbarComponent } from './navbar/navbar.component';
-import { LoginService } from './service/login.service';
-import { AuthInterceptor } from './interceptor/auth-interceptor';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
->>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -84,23 +67,9 @@ import { RemoveBookFromCartModalComponent } from './modals/remove-book-from-cart
 import { NavbarComponent } from './navbar/navbar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FormatPipe } from './pipe/table/format.pipe';
-<<<<<<< HEAD
 import { LoginService } from './service/login.service';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { UserBorrowingComponent } from './components/user/library/user-borrowing/user-borrowing.component';
-=======
-import {MatSidenavModule} from '@angular/material/sidenav';
-import { FloorComponent } from './components/admin/library/floor/floor.component';
-import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
-import { AddEditFloorModalComponent } from './modals/add-edit-floor-modal/add-edit-floor-modal.component';
-import { AddEditSectionModalComponent } from './modals/add-edit-section-modal/add-edit-section-modal.component';
-import { SectionComponent } from './components/admin/library/section/section.component';
-import { ShelfComponent } from './components/admin/library/shelf/shelf.component';
-import { AddEditShelfComponent } from './modals/add-edit-shelf/add-edit-shelf.component';
-import { LocationComponent } from './components/admin/library/location/location.component';
-import { AddEditLocationModalComponent } from './modals/add-edit-location-modal/add-edit-location-modal.component';
-
->>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
 @NgModule({
   declarations: [
     AppComponent,
@@ -123,7 +92,6 @@ import { AddEditLocationModalComponent } from './modals/add-edit-location-modal/
     AddEditShelfComponent,
     LocationComponent,
     AddEditLocationModalComponent,
-<<<<<<< HEAD
     AuthorComponent,
     AddEditAuthorModalComponent,
     BookComponent,
@@ -150,8 +118,6 @@ import { AddEditLocationModalComponent } from './modals/add-edit-location-modal/
     AcceptReservationModalComponent,
     RejectReservationModalComponent,
     UserBorrowingComponent,
-=======
->>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
 
   ],
   imports: [

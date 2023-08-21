@@ -37,10 +37,6 @@ export class AddEditShelfComponent {
     }
   })
   set shelfId(value: number) {
-<<<<<<< HEAD
-=======
-
->>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
     this.id = value;
     this.buildForm();
     this.changeDetectorRef.detectChanges();
@@ -55,14 +51,8 @@ export class AddEditShelfComponent {
       (error) => {
         this.Toast.fire({
           icon: 'error',
-<<<<<<< HEAD
           title: 'There are no floors'
         })
-=======
-          title: error
-        })
-
->>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
       }
     )
   }
@@ -70,10 +60,6 @@ export class AddEditShelfComponent {
     return this.form.controls;
   }
   saveShelf() {
-<<<<<<< HEAD
-=======
-
->>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
     let floorNo = this.form.controls['floorNo'].value;
     let sectionId = this.form.controls['sectionName'].value;
     let shelfNo = this.form.controls['shelfNo'].value;
@@ -83,7 +69,6 @@ export class AddEditShelfComponent {
     if (this.id === 0) {
       this.locationService.addShelf(this.shelf).subscribe((res) => {
         this.activeModal.close(true);
-<<<<<<< HEAD
         this.Toast.fire({
           icon: 'success',
           title: "successfully added!"
@@ -107,54 +92,15 @@ export class AddEditShelfComponent {
           this.error_msg = error;
         });
     }
-=======
-      },
-        (error) => {
-          this.isError = true
-          this.Toast.fire({
-            icon: 'error',
-            title: error
-          })
-        });
-
-    }
-    else {
-      console.log(this.id);
-      
-      this.locationService.updateShelf(this.shelf, this.id).subscribe((res) => {
-        this.activeModal.close(true);
-      },
-        (error) => {
-          this.isError = true
-          this.Toast.fire({
-            icon: 'error',
-            title: error
-          })
-        });
-
-    }
-
-
-
->>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
   }
 
   buildForm() {
     this.form = this.formBuilder.group({
-<<<<<<< HEAD
       floorNo: ['', [Validators.required, Validators.min(0)]],
       sectionName: ['', [Validators.required, Validators.min(0)]],
       shelfNo: ['', [Validators.required, Validators.min(0)]]
     });
 
-=======
-      floorNo: ['', [Validators.required, Validators.min(-1)]],
-      sectionName: ['', [Validators.required, Validators.min(-1)]],
-      shelfNo: ['', [Validators.required, Validators.min(-1)]]
-    });
-
-
->>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
     if (this.id > 0) {
       this.isAdd = false;
       this.locationService.getShelf(this.id).subscribe((res: any) => {
@@ -180,7 +126,6 @@ export class AddEditShelfComponent {
     if (floorSelection != 0) {
       this.locationService.getAllSections(floorSelection).subscribe((res: any) => {
         this.sections = res;
-<<<<<<< HEAD
         this.sectionSelected = res[0]?.sectionId; 
       },
         (error) => {
@@ -193,27 +138,5 @@ export class AddEditShelfComponent {
       )
     }
   }
-=======
-        console.log(
-          res
-        );
-        
-        this.sectionSelected = res[0]?.sectionId;
-         
-      },
-        (error) => {
-          this.Toast.fire({
-            icon: 'error',
-            title: error
-          })
-
-        }
-      )
-    }
-
-
-  }
-
->>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
 }
 

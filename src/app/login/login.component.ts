@@ -19,11 +19,6 @@ export class LoginComponent {
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]]
     });
   }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
   get fc() {
     return this.form.controls;
   }
@@ -33,16 +28,9 @@ export class LoginComponent {
     let password = this.form.controls['password'].value;
     this.user.phoneNumber = phoneNumber;
     this.user.password = password;
-<<<<<<< HEAD
     this.loginService.doLogin(this.user).subscribe(
       (response: any) => {
         this.loginService.loginUser(response.token, response.role, response.refreshToken, response.userId); 
-=======
-
-    this.loginService.doLogin(this.user).subscribe(
-      (response: any) => {
-        this.loginService.loginUser(response.token, response.role, response.refreshToken, response.userId);
->>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
         if (response.role === "ADMIN") {
           window.location.href = "/admin";
         } else {

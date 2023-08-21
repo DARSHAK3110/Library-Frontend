@@ -1,35 +1,19 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-<<<<<<< HEAD
 import { Location } from '../model/location';
 import { Section } from '../model/section';
 import { Shelf } from '../model/shelf';
 import { Author } from '../model/author';
-=======
-import { Section } from '../model/section';
-import { Shelf } from '../model/shelf';
->>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocationService {
-<<<<<<< HEAD
  
   url: string = String("http://localhost:8091/library/api/v1/");
 
   constructor(private httpClient : HttpClient){ }
 
-=======
-  getAllSections(floorNo: any) {
-    return this.httpClient.get(`${this.url}sections/floors/${floorNo}`); 
-
-  }
-  url: string = String("http://localhost:8095/library/api/v1/");
-
-  constructor(private httpClient : HttpClient){
-    }
->>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
   updateFloor(floor:any, id:number) {
     return this.httpClient.put(`${this.url}floors/floor/${id}`,floor);
   }
@@ -78,7 +62,6 @@ export class LocationService {
   getShelf(id: any) {
    return this.httpClient.get(`${this.url}shelfs/shelf/${id}`);
   }
-<<<<<<< HEAD
 
   updateLocation(location:any, id:number) {
     return this.httpClient.put(`${this.url}locations/location/${id}`,location);
@@ -141,6 +124,4 @@ export class LocationService {
   updateAuthor(author: Author, id: any) {
     return this.httpClient.put(`${this.url}authors/author/${id}`,author);
   }
-=======
->>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
 }

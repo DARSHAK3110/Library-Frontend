@@ -9,7 +9,6 @@ import { MediaMatcher } from '@angular/cdk/layout';
 })
 export class NavbarComponent {
   role!:string;
-<<<<<<< HEAD
   userType!:string;
   private _mobileQueryListener: () => void;
   mobileQuery: MediaQueryList;
@@ -18,15 +17,6 @@ export class NavbarComponent {
   constructor(changeDetectorRef: ChangeDetectorRef,private loginService:LoginService, media: MediaMatcher) {
     this.role =String(localStorage.getItem("role"));
     this.userType = this.role.toLocaleLowerCase();
-=======
-  private _mobileQueryListener: () => void;
-  mobileQuery: MediaQueryList;
-  adminNav = {"Users":"/dashboard","Floor":"/admin/library/floor", "Section":"/admin/library/section", "Shelf":"/admin/library/shelf"}
-  userNav = ['hij','klm']
-  constructor(changeDetectorRef: ChangeDetectorRef,private loginService:LoginService, media: MediaMatcher) {
-    this.role =String(localStorage.getItem("role"));
- 
->>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
