@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./chech-out-modal.component.css']
 })
 export class ChechOutModalComponent {
-  
+  isExpired=false;
   id:any;
   isError!:boolean;
   isAdd!:boolean;
@@ -43,8 +43,6 @@ export class ChechOutModalComponent {
     return this.form.controls;
   }
   checkedOut(){
-   console.log(this.id);
-   
    this.bookService.checkOut(this.id).subscribe((res)=>{
         this.activeModal.close(true);
         this.Toast.fire({
@@ -61,6 +59,10 @@ export class ChechOutModalComponent {
   getBorrowing(value: number) {
    this.bookService.getBorrowingByBookStatus(value).subscribe((res: any)=>{
     this.borrower = res;
+    let date = new Date(this.borrower.borrowingDate);
+    if(date.setDate(date.getDate()+7) < Date.now()){
+      this.isExpired = true;
+    }
     this.id = res.bookBorrowingId;
    },
    (error)=>{

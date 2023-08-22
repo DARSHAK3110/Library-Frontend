@@ -4,15 +4,78 @@
     </div>
     <div class="modal-body">
       <div class="div">
-        Are you sure want to accept this request?
+        <div class="h5">
+          Available books <div class="h6"> (select any book for as reserve for that user)</div>
+        </div>
+        <div class="mt-5">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="noRecord">
+              <td mat-footer-cell *matFooterCellDef>No records found.</td>
+            </ng-container>
+            <ng-container matColumnDef="index">
+              <th mat-header-cell *matHeaderCellDef>Index</th>
+              <td mat-cell *matCellDef="let element; let i = index">{{(pageSize*currentPage)+i }}</td>
+            </ng-container>
+            
+            <ng-container matColumnDef="floorNo">
+              <th mat-header-cell *matHeaderCellDef>Floor No.</th>
+              <td mat-cell *matCellDef="let element">{{ element.floorNo }}</td>
+            </ng-container>
+  
+            <ng-container matColumnDef="sectionName">
+              <th mat-header-cell *matHeaderCellDef>Section Name</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.sectionName }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="shelfNo">
+              <th mat-header-cell *matHeaderCellDef>Shelf No</th>
+              <td mat-cell *matCellDef="let element">{{ element.shelfNo }}</td>
+            </ng-container>
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef>Position</th>
+              <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Action</th>
+              <td mat-cell *matCellDef="let element">
+                <span class="location-accordion-item-description">
+                  <button
+                    mat-raised-button
+                    color="primary" class="me-2"
+                    (click)="reserveBookStatus(element.bookStatusId)"
+                  >
+                    <mat-icon>reserve</mat-icon>Reserve book
+                  </button>
+                </span>
+              </td>
+            </ng-container>
+            <ng-template [*ngIf]="dataSource?.data.length === 0">
+              <tr mat-footer-row *matFooterRowDef="['noRecord']"></tr>
+          </ng-template>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumns; let i = index"
+            ></tr>
+          </table>
+  
+          <mat-paginator
+            #paginator
+            [length]="totalRows"
+            [pageIndex]="currentPage"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="pageChanged($event)"
+            aria-label="Select page"
+          >
+          </mat-paginator>
+        </div>
       </div>
     </div>
     <div class="modal-footer">
       <button type="button"
         class="btn btn-outline-dark"
         (click)="activeModal.close(false)">Cancel</button>
-      <button type="button"
-        class="btn btn-outline-dark"
-        (click)="acceptReservation()">OK</button>
     </div>
   </div>

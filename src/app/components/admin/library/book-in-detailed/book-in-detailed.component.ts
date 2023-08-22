@@ -60,6 +60,8 @@ export class BookInDetailedComponent {
   ngOnInit(): void {
     this.bookId = this.route.snapshot.paramMap.get('id');
     this.getBook(this.bookId);
+    console.log("123");
+    
     this.getBookStatuses(this.bookId);
   }
   constructor(private route: ActivatedRoute, private bookService: BookService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private modalService: ModalService) {

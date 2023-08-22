@@ -19,13 +19,12 @@
     </div>
     <div class="mt-5">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="noRecord">
+                <td mat-footer-cell *matFooterCellDef>No records found.</td>
+              </ng-container>
             <ng-container matColumnDef="index">
                 <th mat-header-cell *matHeaderCellDef> Index </th>
-<<<<<<< HEAD
                 <td mat-cell *matCellDef="let element; let i = index;">{{(pageSize*currentPage)+i+1}}</td>
-=======
-                <td mat-cell *matCellDef="let element; let i = index;">{{i}}</td>
->>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
             </ng-container>
             <ng-container matColumnDef="floorNo">
                 <th mat-header-cell *matHeaderCellDef> Floor No. </th>
@@ -43,21 +42,17 @@
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef> Action </th>
                 <td mat-cell *matCellDef="let element"> <span class="shelf-accordion-item-description">
-<<<<<<< HEAD
                         <button class= "me-2" mat-raised-button color="primary" (click)="addEditShelf(element.shelfId)">
                             <mat-icon>edit</mat-icon>Edit
                         </button>
                         <button class= "ms-2" mat-raised-button color="accent" (click)="deleteShelf(element.shelfId)">
                             <mat-icon>delete</mat-icon>Delete
                         </button>
-=======
-                        <button mat-raised-button color="primary" (click)="addEditShelf(element.shelfId)">
-                            <mat-icon>edit</mat-icon>Edit
-                        </button>
-
->>>>>>> f3fada5b62d9fa1a028be3efc3a59e35705b164d
                     </span> </td>
             </ng-container>
+            <ng-template [ngIf]="dataSource?.data.length === 0">
+                <tr mat-footer-row *matFooterRowDef="['noRecord']"></tr>
+            </ng-template>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
         </table>

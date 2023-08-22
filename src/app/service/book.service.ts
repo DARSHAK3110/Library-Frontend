@@ -11,7 +11,6 @@ import { catchError, throwError } from 'rxjs';
 })
 export class BookService {
 
- 
   url: string = String("http://localhost:8091/library/api/v1");
   constructor(private httpClient: HttpClient) {
   }
@@ -67,8 +66,12 @@ export class BookService {
   addBookDetailsToCart(id: any) {
     return this.httpClient.post(`${this.url}/cart`, id);
   }
-  getBookStatuses(currentPage: number, pageSize: number, search: string, id: number, filter: number) {
+  getBookStatuses(currentPage: number, pageSize: number, search: string, id: number, filter: number) { 
     return this.httpClient.get(`${this.url}/bookstatuses/book/${id}`, { params: new HttpParams().set("availability", filter).set("search", search).set("pageSize", pageSize).set("pageNumber", currentPage) });
+  }
+
+  getBookStatusesByIsbn(currentPage: number, pageSize: number, search: string, isbn: number, filter: number) {
+    return this.httpClient.get(`${this.url}/bookstatuses/isbn/${isbn}`, { params: new HttpParams().set("availability", filter).set("search", search).set("pageSize", pageSize).set("pageNumber", currentPage) });
   }
 
   getBookStatusesByLocations(currentPage: number, pageSize: number, id: any, page: any) {
@@ -98,7 +101,6 @@ export class BookService {
   }
 
 
-
   addReservation(reserver: Reserver) {
     return this.httpClient.post(`${this.url}/reservations`, reserver);
   }
@@ -107,6 +109,13 @@ export class BookService {
     return this.httpClient.post(`${this.url}/borrowings`, borrower);
   }
 
+  countCurrentBorrowings(value: any) {
+    return this.httpClient.get(`${this.url}/borrowings/bookcounter/${value}`);
+  }
+
+  countCurrentReservations(value: any) {
+    return this.httpClient.get(`${this.url}/reservations/reservationcounter/${value}`);
+  }
   getBorrowingByBookStatus(value: number) {
     return this.httpClient.get(`${this.url}/borrowings/bookstatus/${value}`)
   }
@@ -126,23 +135,39 @@ export class BookService {
     return this.httpClient.get(`${this.url}/reservations`, { params: new HttpParams().set("search", search).set("pageSize", pageSize).set("pageNumber", currentPage).set("user",false) });
   }
 
+  getReservationsByFilter(currentPage: number, pageSize: number, search: string, startDate: string, endDate: string) {
+    return this.httpClient.get(`${this.url}/reservations`, { params: new HttpParams().set("search", search).set("pageSize", pageSize).set("pageNumber", currentPage).set("user",false).set("startDate",startDate).set("endDate",endDate) });
+  }
+  getReservationsByUserWithFilter(currentPage: number, pageSize: number, search: string, startDate: string, endDate: string) {
+    return this.httpClient.get(`${this.url}/reservations`, { params: new HttpParams().set("search", search).set("pageSize", pageSize).set("pageNumber", currentPage).set("user",true).set("startDate",startDate).set("endDate",endDate) });
+  }
   getReservationsByUser(currentPage: number, pageSize: number, search: string) {
     return this.httpClient.get(`${this.url}/reservations`, { params: new HttpParams().set("search", search).set("pageSize", pageSize).set("pageNumber", currentPage).set("user",true) });
   }
 
   rejectReservation(id: any) {
-    return this.httpClient.post(`${this.url}/reservations/status/${id}`,false);
+    let dto = {
+      'status':false
+    }
+    return this.httpClient.post(`${this.url}/reservations/status/${id}`,dto);
   }
   
-  acceptReservation(id: any) {
-    return this.httpClient.post(`${this.url}/reservations/status/${id}`,true);
+  acceptReservation(id: any,bookStatusId:number) {
+    let dto = {'status':true,'bookStatusId':bookStatusId}
+    return this.httpClient.post(`${this.url}/reservations/status/${id}`,dto);
   }
   getBorrowings(currentPage: number, pageSize: number, search: string) {
     return this.httpClient.get(`${this.url}/borrowings`, { params: new HttpParams().set("search", search).set("user",false).set("pageSize", pageSize).set("pageNumber", currentPage) });
   }
-
+  getBorrowingsWithDate(currentPage: number, pageSize: number, search: string, startDate: string, endDate: string,filterSelector:boolean) {
+    return this.httpClient.get(`${this.url}/borrowings`, { params: new HttpParams().set("search", search).set("user",false).set("pageSize", pageSize).set("pageNumber", currentPage).set("startDate",startDate).set("endDate",endDate).set("deletedAt",filterSelector) });
+  }
   getBorrowingsByUser(currentPage: number, pageSize: number, search: string) {
     return this.httpClient.get(`${this.url}/borrowings`, { params: new HttpParams().set("search", search).set("user",true).set("pageSize", pageSize).set("pageNumber", currentPage) });
+  }
+
+  getBorrowingsByUserWithDate(currentPage: number, pageSize: number, search: string, startDate: string, endDate: string,filterSelector:boolean) {
+    return this.httpClient.get(`${this.url}/borrowings`, { params: new HttpParams().set("search", search).set("user",true).set("pageSize", pageSize).set("pageNumber", currentPage).set("startDate",startDate).set("endDate",endDate).set("deletedAt",filterSelector) });
   }
   deleteBookFromCart(id: any) {
     return this.httpClient.delete(`${this.url}/cart/cartitem/${id}`);

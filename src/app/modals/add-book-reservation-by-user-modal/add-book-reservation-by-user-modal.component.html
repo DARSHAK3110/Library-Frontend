@@ -3,7 +3,7 @@
     <h4 class="modal-title">Reservation</h4>
   </div>
   <div class="modal-body">
-    <div class="div">
+    <div class="div" *ngIf="isUserHasLessBooks && isUserHasLessReservations">
       <form [formGroup]="form">
         Are you sure want to reserve this book?
         <div class="form-group">
@@ -15,6 +15,8 @@
             class="form-control"
             id="reservation-date"
             formControlName="reservationDate"
+            min="{{fromdate | date:'yyyy-MM-dd'}}"
+            max="{{todate | date:'yyyy-MM-dd'}}"
             [class.is-invalid]="
               (fc.reservationDate?.touched || fc.reservationDate?.dirty) &&
               fc.reservationDate?.invalid
@@ -50,6 +52,30 @@
           </button>
         </div>
       </form>
+    </div>
+    <div *ngIf="!isUserHasLessBooks">
+      You already borrow 3 books!!
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          (click)="activeModal.close(false)"
+        >
+          Cancel
+        </button>
+        </div>
+    </div>
+    <div *ngIf="!isUserHasLessReservations && isUserHasLessBooks">
+      You already reserve 3 books!!
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          (click)="activeModal.close(false)"
+        >
+          Cancel
+        </button>
+        </div>
     </div>
   </div>
 </div>

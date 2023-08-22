@@ -8,6 +8,12 @@ import { UserService } from 'src/app/service/user.service';
 import { phoneNumberValidator } from 'src/app/validator/phoneNumber.validators';
 import Swal from 'sweetalert2';
 
+const today = new Date();
+const day = today.getDate();
+const month = today.getMonth();
+const year = today.getFullYear();
+
+
 @Component({
   selector: 'app-add-reservation-modal',
   templateUrl: './add-reservation-modal.component.html',
@@ -18,8 +24,12 @@ export class AddReservationModalComponent {
   isError!:boolean;
   isAdd!:boolean;
   error_msg!:string;
+  isUserHasLessReservations = false;
+  isUserHasLessBooks = false;
   reserver:Reserver = new Reserver();
   form:any;
+  fromdate:any;
+  todate:any;
   isReserverCheked:any = false;
   Toast:any = Swal.mixin({
     toast: true,
@@ -39,7 +49,8 @@ export class AddReservationModalComponent {
   }
  
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private userService: UserService,private changeDetectorRef: ChangeDetectorRef, private bookService: BookService) {
-   
+    this.fromdate= new Date();
+    this.todate = new Date(year,month,day+3);
   }
   get fc(){
     return this.form.controls;
@@ -50,33 +61,54 @@ export class AddReservationModalComponent {
     this.reserver.phone = reserverPhoneNumber;
     this.reserver.bookDetailsId = this.id;
     this.reserver.reservationDate = reservationDate;
-
-   console.log(this.reserver);
-   
-      
+  
       this.bookService.addReservation(this.reserver).subscribe((res)=>{
         this.activeModal.close(true);
       },
       (error)=>{
         this.isError = true
         this.error_msg = error
-        
       });
-
-    
-    
-
 
   }
   checkUser(){
     this.userService.getUser(this.form.controls['reserverPhoneNumber'].value).subscribe((res)=>{
       this.isReserverCheked = true;
-      console.log(res);
+      this.bookService.countCurrentBorrowings(this.form.controls['reserverPhoneNumber'].value).subscribe((res)=>{
+        if(res){
+          this.isUserHasLessBooks=true
+          this.bookService.countCurrentReservations(this.form.controls['reserverPhoneNumber'].value).subscribe((res)=>{
+            if(res){
+              this.isUserHasLessReservations = true             
+            }
+            else{
+              this.patcher();
+              this.isUserHasLessReservations = false; 
+            }  
+          },
+          (error)=>{
+            console.log(error);
+            this.patcher();
+            this.isUserHasLessReservations = false;
+          })
+          
+        }
+        else{
+          this.patcher();
+          this.isUserHasLessBooks = false; 
+        }
+        
+      },
+      (error)=>{
+        console.log(error);
+        this.patcher();
+        this.isUserHasLessBooks = false;
+      })
       
     },
     (error)=>{
       console.log(error);
-      this.form.controls['reserverPhoneNumber'].value = null;
+      this.patcher();
       this.isReserverCheked = false;
     })
 
@@ -88,5 +120,10 @@ export class AddReservationModalComponent {
       reservationDate: ['',[Validators.required]]
     });
     
+  }
+  patcher(){
+    this.form.patchValue({
+      "reserverPhoneNumber": null,
+    })
   }
 }

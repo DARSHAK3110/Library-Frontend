@@ -9,7 +9,10 @@
             <div class="row">
                 <div class="col-8">
                     <div class="form-group" >
-                        <label for="reserver-phone-number">Phone number:<span *ngIf = "isReserverCheked" class="text-success">User Granted</span><span *ngIf = "!isReserverCheked" class="text-danger">User must check first!!</span></label>
+                        <label for="reserver-phone-number">Phone number:<span *ngIf = "isReserverCheked && isUserHasLessBooks && isUserHasLessReservations" class="text-success">User Granted</span>
+                            <span *ngIf = "isReserverCheked && !isUserHasLessBooks" class="text-danger">User already borrow 3 books!!</span>
+                            <span *ngIf = "isReserverCheked && isUserHasLessBooks && !isUserHasLessReservations" class="text-danger">User already reserve 3 books!!</span>
+                            <span *ngIf = "!isReserverCheked" class="text-danger">User must check first!!</span></label>
                         <input type="tel" class="form-control" id="reserver-phone-number" formControlName="reserverPhoneNumber"
                             placeholder="Enter phone number" name="reserverPhoneNumber" value="reserver.phoneNumber">
                                     <div *ngIf="fc.reserverPhoneNumber.errors?.required">     
@@ -39,6 +42,8 @@
                       type="date"
                       class="form-control"
                       id="reservation-date"
+                      min="{{fromdate | date:'yyyy-MM-dd'}}"
+                      max="{{todate | date:'yyyy-MM-dd'}}"
                       formControlName="reservationDate"
                       [class.is-invalid]="(fc.reservationDate?.touched || fc.reservationDate?.dirty) && fc.reservationDate?.invalid"
                     />
@@ -50,7 +55,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-dark" (click)="activeModal.close(false)">Cancel</button>
-                <button type="button" class="btn btn-success" [disabled]="form.invalid || !isReserverCheked"
+                <button type="button" class="btn btn-success" [disabled]="form.invalid || !isReserverCheked || !isUserHasLessBooks || !isUserHasLessReservations"
                     (click)="saveReservation()">Submit</button>
             </div>
         </form>

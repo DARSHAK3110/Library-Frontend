@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -70,6 +70,8 @@ import { FormatPipe } from './pipe/table/format.pipe';
 import { LoginService } from './service/login.service';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { UserBorrowingComponent } from './components/user/library/user-borrowing/user-borrowing.component';
+import { ExpirePipe } from './pipe/expire/expire.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -118,6 +120,7 @@ import { UserBorrowingComponent } from './components/user/library/user-borrowing
     AcceptReservationModalComponent,
     RejectReservationModalComponent,
     UserBorrowingComponent,
+    ExpirePipe,
 
   ],
   imports: [
@@ -143,7 +146,7 @@ import { UserBorrowingComponent } from './components/user/library/user-borrowing
     CdkAccordionModule,
     NgbModule
   ],
-  providers: [LoginService,[{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor, multi:true}]],
+  providers: [LoginService,[{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor, multi:true},{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }]],
   bootstrap: [AppComponent],
   schemas: [
     NO_ERRORS_SCHEMA

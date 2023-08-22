@@ -196,9 +196,10 @@ export class ModalService {
   }))
   }
 
-  onAcceptReservation(reservationId: number) {
-    const modal = this.ngbModal.open(AcceptReservationModalComponent);
+  onAcceptReservation(reservationId: number, isbn:number) {
+    const modal = this.ngbModal.open(AcceptReservationModalComponent, { size: 'lg', backdrop: 'static' });
     modal.componentInstance.reservationId = reservationId;
+    modal.componentInstance.isbnNo = isbn;
     return from(modal.result).pipe(catchError(error => {
       return of(error);
     }))

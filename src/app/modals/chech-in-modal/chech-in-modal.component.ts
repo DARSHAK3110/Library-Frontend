@@ -16,6 +16,7 @@ export class ChechInModalComponent {
   id:any;
   isError!:boolean;
   isAdd!:boolean;
+  isUserHasLessBooks=false;
   error_msg!:string;
   borrower:Borrower = new Borrower();
   form:any;
@@ -44,10 +45,8 @@ export class ChechInModalComponent {
   }
   checkedIn(){
     let borrowerPhoneNumber = this.form.controls['borrowerPhoneNumber'].value;
-    let borrowingDate = this.form.controls['borrowingDate'].value;
     this.borrower.phone = borrowerPhoneNumber;
     this.borrower.bookStatusId = this.id;
-    this.borrower.borrowingDate = borrowingDate;
       this.bookService.checkIn(this.borrower).subscribe((res)=>{
         this.activeModal.close(true);
         this.Toast.fire({
@@ -60,21 +59,46 @@ export class ChechInModalComponent {
         this.error_msg = error
       });
   }
+
   checkUser(){
     this.userService.getUser(this.form.controls['borrowerPhoneNumber'].value).subscribe((res)=>{
       this.isBorrowerCheked = true;
+      this.bookService.countCurrentBorrowings(this.form.controls['borrowerPhoneNumber'].value).subscribe((res)=>{
+        if(res){
+          this.isUserHasLessBooks=true;
+        }
+        else{
+          this.patcher();
+          this.isUserHasLessBooks = false; 
+        }
+        
+      },
+      (error)=>{
+        console.log(error);
+        this.patcher();
+        this.isUserHasLessBooks = false;
+      })
+      
     },
     (error)=>{
+      console.log(error);
       this.isError = true
-      this.form.controls['borrowerPhoneNumber'].value = null;
-      this.isBorrowerCheked = false;
       this.error_msg = error
+      this.patcher();
+      this.isBorrowerCheked = false;
+    })
+  
+    
+  }
+  patcher(){
+    this.form.patchValue({
+      "reserverPhoneNumber": null,
     })
   }
+
   buildForm(){
     this.form =  this.formBuilder.group({
-      borrowerPhoneNumber: ['',[Validators.required, Validators.min(1000000000), Validators.max(9999999999), phoneNumberValidator.phoneNumberValidations]],
-      borrowingDate: ['',[Validators.required]]
+      borrowerPhoneNumber: ['',[Validators.required, Validators.min(1000000000), Validators.max(9999999999), phoneNumberValidator.phoneNumberValidations]]
     });  
   }
 }
