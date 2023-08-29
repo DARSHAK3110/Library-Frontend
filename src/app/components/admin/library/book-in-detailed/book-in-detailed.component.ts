@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./book-in-detailed.component.css']
 })
 export class BookInDetailedComponent {
-  displayedColumns: string[] = ['index', 'floorNo', 'sectionName', 'shelfNo', 'position', 'isAvailable', 'actions'];
+  displayedColumns: string[] = ['index', 'floorNo', 'sectionName', 'shelfNo', 'position', 'isAvailable','isReserved', 'actions'];
   bookStatuses: any;
   file: any;
   fileName: any;
@@ -93,6 +93,8 @@ export class BookInDetailedComponent {
   getBookStatuses(bookId: number) {
     this.bookService.getBookStatuses(this.currentPage, this.pageSize, this.search, bookId, Number(this.filter)).subscribe(
       (bookDto: any) => {
+        console.log(bookDto.content);
+        
         this.bookStatuses = bookDto.content;
         this.dataSource = new MatTableDataSource(bookDto.content);
         this.totalRows = bookDto.totalElements;
@@ -114,9 +116,9 @@ export class BookInDetailedComponent {
 
   }
 
-  checkIn(bookStatusId: number) {
+  checkIn(bookStatusId: number,isReserved:boolean) {
 
-    this.modalService.chechIn(bookStatusId).subscribe((res) => {
+    this.modalService.chechIn(bookStatusId,isReserved).subscribe((res) => {
       this.getBookStatuses(this.bookId);
     },
       (error) => {

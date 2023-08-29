@@ -64,11 +64,21 @@ export class ShelfComponent {
     })
   }
 
-  deleteShelf(shelfId: number) {
+  deleteShelf(shelfId: number, isAutomated:boolean) {
     this.bookService.checkOrphanBooksByLocation(shelfId,'shelf').pipe(take(1)).subscribe((res: any) => {
       let counter = Number(res.message);
       if (counter > 0) {
-        this._router.navigate([`/admin/library/unlocated/shelf/${shelfId}`]);
+        if(isAutomated){
+          this.modalService.autoDeleteShelfModal(shelfId).pipe(take(1)).subscribe((res: any) => {
+            this.getShelfs();
+          }, (error) => {
+            console.log(error);
+          })
+        }
+        else{
+          this._router.navigate([`/admin/library/unlocated/shelf/${shelfId}`]);    
+        }
+       
       } else {
         this.modalService.deleteLocationModal(shelfId,'shelf').pipe(take(1)).subscribe((res: any) => {
           this.getShelfs();

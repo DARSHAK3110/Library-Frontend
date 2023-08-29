@@ -54,8 +54,8 @@ export class UserBookComponent {
     )
   }
 
-  addBookToCart(bookId: number) {
-    this.modalService.onAddBookToCart(bookId).pipe(take(1)).subscribe(result => {
+  addBookToFavourite(bookId: number) {
+    this.modalService.onAddBookToFavourite(bookId).pipe(take(1)).subscribe(result => {
       this.getBooks();
     }, (error) => {
       console.log(error);

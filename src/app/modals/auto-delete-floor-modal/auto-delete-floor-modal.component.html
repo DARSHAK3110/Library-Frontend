@@ -1,0 +1,36 @@
+<div>
+  <div class="modal-header">
+      <h4 class="modal-title">Specify Floor</h4>
+  </div>
+
+  <div class="modal-body">
+      <div class="text-danger" *ngIf="isError">*{{error_msg}}</div>
+      <form [formGroup]='form'>
+
+          <div class="form-group">
+              <label for="floorNo">Floor Number</label>
+              <input type="number" class="form-control" id="floor-no" formControlName="floorNo"
+                  placeholder="Enter floor no." name="floorNo">
+              <div *ngIf="fc.floorNo.errors?.required">
+                  <div class="text-danger" *ngIf="fc.floorNo.touched && fc.floorNo.invalid">
+                      Floor no. required.
+                  </div>
+              </div>
+              <div *ngIf="!fc.floorNo.errors?.required">
+                  <div *ngIf="fc.floorNo.errors?.minCheckerValidation">
+                      <div class="text-danger" *ngIf="fc.floorNo.touched && fc.floorNo.invalid">
+                          Floor no. invalid!!! it's must be greater than -1 !!!
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <br>
+
+          <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="activeModal.close(false)">Cancel</button>
+              <button type="button" class="btn btn-success" [disabled]="form.invalid"
+                  (click)="deleteFloor()">Submit</button>
+          </div>
+      </form>
+
+  </div>

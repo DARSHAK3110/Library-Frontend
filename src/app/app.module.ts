@@ -39,13 +39,13 @@ import { UsersComponent } from './components/admin/users/users.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { ContactUsComponent } from './components/user/library/contact-us/contact-us.component';
 import { UserBookComponent } from './components/user/library/user-book/user-book.component';
-import { UserCartComponent } from './components/user/library/user-cart/user-cart.component';
+import { UserFavouriteComponent } from './components/user/library/user-favourite/user-favourite.component';
 import { UserReservationComponent } from './components/user/library/user-reservation/user-reservation.component';
 import { AuthInterceptor } from './interceptor/auth-interceptor';
 import { LoginComponent } from './login/login.component';
 import { AcceptReservationModalComponent } from './modals/accept-reservation-modal/accept-reservation-modal.component';
 import { AddBookReservationByUserModalComponent } from './modals/add-book-reservation-by-user-modal/add-book-reservation-by-user-modal.component';
-import { AddBookToCartModalComponent } from './modals/add-book-to-cart-modal/add-book-to-cart-modal.component';
+import { AddBookToFavouriteModalComponent } from './modals/add-book-to-favourite-modal/add-book-to-favourite-modal.component';
 import { AddEditAuthorModalComponent } from './modals/add-edit-author-modal/add-edit-author-modal.component';
 import { AddEditBookStatusModalComponent } from './modals/add-edit-book-status-modal/add-edit-book-status-modal.component';
 import { AddEditBookComponent } from './modals/add-edit-book/add-edit-book.component';
@@ -63,7 +63,7 @@ import { DeleteBookStatusModalComponent } from './modals/delete-book-status-moda
 import { DeleteLocationModalComponent } from './modals/delete-location-modal/delete-location-modal.component';
 import { DeleteUserModalComponent } from './modals/delete-user-modal/delete-user-modal.component';
 import { RejectReservationModalComponent } from './modals/reject-reservation-modal/reject-reservation-modal.component';
-import { RemoveBookFromCartModalComponent } from './modals/remove-book-from-cart-modal/remove-book-from-cart-modal.component';
+import { RemoveBookFromFavouriteModalComponent } from './modals/remove-book-from-favourite-modal/remove-book-from-favourite-modal.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FormatPipe } from './pipe/table/format.pipe';
@@ -71,7 +71,11 @@ import { LoginService } from './service/login.service';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { UserBorrowingComponent } from './components/user/library/user-borrowing/user-borrowing.component';
 import { ExpirePipe } from './pipe/expire/expire.pipe';
-
+import {MatChipsModule} from '@angular/material/chips';
+import { AutoDeleteLocationModalComponent } from './modals/auto-delete-location-modal/auto-delete-location-modal.component';
+import { AutoDeleteShelfModalComponent } from './modals/auto-delete-shelf-modal/auto-delete-shelf-modal.component';
+import { AutoDeleteSectionModalComponent } from './modals/auto-delete-section-modal/auto-delete-section-modal.component';
+import { AutoDeleteFloorModalComponent } from './modals/auto-delete-floor-modal/auto-delete-floor-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -111,16 +115,20 @@ import { ExpirePipe } from './pipe/expire/expire.pipe';
     ChangeBookStatusModalComponent,
     DeleteBookStatusModalComponent,
     UserBookComponent,
-    AddBookToCartModalComponent,
+    AddBookToFavouriteModalComponent,
     AddBookReservationByUserModalComponent,
     UserReservationComponent,
-    UserCartComponent,
-    RemoveBookFromCartModalComponent,
+    UserFavouriteComponent,
+    RemoveBookFromFavouriteModalComponent,
     ContactUsComponent,
     AcceptReservationModalComponent,
     RejectReservationModalComponent,
     UserBorrowingComponent,
     ExpirePipe,
+    AutoDeleteLocationModalComponent,
+    AutoDeleteShelfModalComponent,
+    AutoDeleteSectionModalComponent,
+    AutoDeleteFloorModalComponent,
 
   ],
   imports: [
@@ -135,6 +143,7 @@ import { ExpirePipe } from './pipe/expire/expire.pipe';
     MatButtonModule,
     MatIconModule,
     MatInputModule,
+    MatChipsModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatProgressBarModule,

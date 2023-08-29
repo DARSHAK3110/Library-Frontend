@@ -60,13 +60,23 @@ export class FloorComponent {
     });
   }
 
-  deleteFloor(floorId: number) {
+  deleteFloor(floorId: number, isAutomated:boolean) {
     this.bookService.checkOrphanBooksByLocation(floorId,'floor').pipe(take(1)).subscribe((res: any) => {
       let counter = Number(res.message);
       console.log(counter);
       
       if (counter > 0) {
-        this._router.navigate([`/admin/library/unlocated/floor/${floorId}`]);
+        if(isAutomated){
+          this.modalService.autoDeleteFloorModal(floorId).pipe(take(1)).subscribe((res: any) => {
+            this.getFloors();
+          }, (error) => {
+            console.log(error);
+          })
+        }
+        else{
+          this._router.navigate([`/admin/library/unlocated/floor/${floorId}`]);
+        }
+        
       } else {
         this.modalService.deleteLocationModal(floorId,'floor').pipe(take(1)).subscribe((res: any) => {
           this.getFloors();

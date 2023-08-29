@@ -16,6 +16,8 @@ export class ChechInModalComponent {
   id:any;
   isError!:boolean;
   isAdd!:boolean;
+  isReserved=false;
+  isReserverChecked=false;
   isUserHasLessBooks=false;
   error_msg!:string;
   borrower:Borrower = new Borrower();
@@ -38,7 +40,15 @@ export class ChechInModalComponent {
     this.changeDetectorRef.detectChanges();
   }
  
+  set reserved(value: boolean) { 
+    console.log(value);
+    this.isReserved = value; 
+    this.buildForm();
+    this.changeDetectorRef.detectChanges();
+  }
+
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private userService: UserService,private changeDetectorRef: ChangeDetectorRef, private bookService: BookService) { 
+
   }
   get fc(){
     return this.form.controls;
@@ -46,7 +56,8 @@ export class ChechInModalComponent {
   checkedIn(){
     let borrowerPhoneNumber = this.form.controls['borrowerPhoneNumber'].value;
     this.borrower.phone = borrowerPhoneNumber;
-    this.borrower.bookStatusId = this.id;
+    this.borrower.bookStatusId = this.id?.bookStatusId;
+    this.borrower.isReserved = this.isReserved;
       this.bookService.checkIn(this.borrower).subscribe((res)=>{
         this.activeModal.close(true);
         this.Toast.fire({
@@ -61,11 +72,32 @@ export class ChechInModalComponent {
   }
 
   checkUser(){
+
     this.userService.getUser(this.form.controls['borrowerPhoneNumber'].value).subscribe((res)=>{
       this.isBorrowerCheked = true;
       this.bookService.countCurrentBorrowings(this.form.controls['borrowerPhoneNumber'].value).subscribe((res)=>{
         if(res){
           this.isUserHasLessBooks=true;
+          if(this.isReserved){
+            this.bookService.checkReserver(this.form.controls['borrowerPhoneNumber'].value,this.id).subscribe((res)=>{
+              if(res){
+                this.isReserverChecked = true;
+               }
+              else{
+                this.patcher();
+                this.isReserverChecked = false; 
+              }
+            }  
+            ,
+            (error)=>{
+              console.log(error);
+              this.patcher();
+              this.isUserHasLessBooks = false;
+            })
+          }
+          else{
+            this.isReserverChecked = true;
+          }  
         }
         else{
           this.patcher();

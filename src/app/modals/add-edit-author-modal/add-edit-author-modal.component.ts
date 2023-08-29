@@ -10,7 +10,6 @@ import { UserService } from 'src/app/service/user.service';
 import { NoSpaceValidator } from 'src/app/validator/noSpace.validator';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-add-edit-author-modal',
   templateUrl: './add-edit-author-modal.component.html',
@@ -23,6 +22,8 @@ export class AddEditAuthorModalComponent {
   error_msg!: string;
   author: Author = new Author();
   form: any;
+  minDate=new Date(1990,0o0,0o1);
+  maxDate=new Date();
   Toast: any = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -71,9 +72,7 @@ export class AddEditAuthorModalComponent {
           this.error_msg = error 
         });
     }
-
-
-  }
+ }
   buildForm() {
     this.form = this.formBuilder.group({
       authorName: ['', [Validators.required, Validators.minLength(3),Validators.maxLength(16)]],
@@ -99,6 +98,4 @@ export class AddEditAuthorModalComponent {
       )
     }
   }
-
-
 }

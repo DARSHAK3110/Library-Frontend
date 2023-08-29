@@ -49,8 +49,12 @@
                         <button class= "me-2" mat-raised-button color="primary" (click)="addEditLocation(element.locationId)">
                             <mat-icon>edit</mat-icon>Edit
                         </button>
-                        <button class= "ms-2" mat-raised-button color="accent" (click)="deleteLocation(element.locationId)">
+                        <button class= "ms-2" mat-raised-button color="accent" (click)="deleteLocation(element.locationId,false)">
                             <mat-icon>delete</mat-icon>Delete
+                        </button>
+                        
+                        <button class= "ms-2" mat-raised-button color="primary" (click)="deleteLocation(element.locationId,true)">
+                            <mat-icon>delete</mat-icon>Delete auto
                         </button>
                     </span> </td>
             </ng-container>

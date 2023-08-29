@@ -4,11 +4,11 @@ import { BookService } from 'src/app/service/book.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-remove-book-from-cart-modal',
-  templateUrl: './remove-book-from-cart-modal.component.html',
-  styleUrls: ['./remove-book-from-cart-modal.component.css']
+  selector: 'app-remove-book-from-favourite-modal',
+  templateUrl: './remove-book-from-favourite-modal.component.html',
+  styleUrls: ['./remove-book-from-favourite-modal.component.css']
 })
-export class RemoveBookFromCartModalComponent {
+export class RemoveBookFromFavouriteModalComponent {
   id:any;
   isError!:boolean;
   isBooks!:boolean;
@@ -39,11 +39,11 @@ export class RemoveBookFromCartModalComponent {
 
   deleteBook(){
    
-      this.bookService.deleteBookFromCart(this.id).subscribe((res)=>{
+      this.bookService.deleteBookFromFavourite(this.id).subscribe((res)=>{
         this.activeModal.close(true);
         this.Toast.fire({
           icon: 'success',
-          title: 'Successfully deleted book from cart'
+          title: 'Successfully deleted book from favourite'
         })
       },
       (error)=>{

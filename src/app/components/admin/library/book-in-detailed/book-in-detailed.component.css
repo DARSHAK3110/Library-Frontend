@@ -6,54 +6,6 @@
     color: blueviolet;
 }
 
-.book-status-accordion {
-    display: block;
-
-  }
-  .add-btn{
-    width: 100px;
-  }
-  .book-status-accordion-item {
-    display: block;
-    border: solid 1px #ccc;
-  }
-  
-  .book-status-accordion-item + .book-status-accordion-item {
-    border-top: none;
-  }
-  
-  .book-status-accordion-item-header {
-    display: flex;
-    align-content: center;
-    justify-content: space-between;
-  }
-  
-  .book-status-accordion-item-description {
-    font-size: 0.85em;
-    color: #999;
-  }
-  
-  .book-status-accordion-item-header,
-  .book-status-accordion-item-body {
-    padding: 16px;
-  }
-  
-  .book-status-accordion-item-header:hover {
-    cursor: pointer;
-    background-color: #eee;
-  }
-  
-  .book-status-accordion-item:first-child {
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-  }
-  
-  .book-status-accordion-item:last-child {
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-  }
-  
-
   .menu-right{
     flex: 1 1 auto;
 }

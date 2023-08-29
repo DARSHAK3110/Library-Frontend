@@ -8,11 +8,11 @@ import { LocationService } from 'src/app/service/location.service';
 import { ModalService } from 'src/app/service/modal.service';
 
 @Component({
-  selector: 'app-user-cart',
-  templateUrl: './user-cart.component.html',
-  styleUrls: ['./user-cart.component.css']
+  selector: 'app-user-favourite',
+  templateUrl: './user-favourite.component.html',
+  styleUrls: ['./user-favourite.component.css']
 })
-export class UserCartComponent {
+export class UserFavouriteComponent {
   displayedColumns: string[] = ['index', 'title', 'author', 'isbn', 'availableCopies', 'totalCopies', 'actions'];
   books: any;
   dataSource: any;
@@ -29,7 +29,7 @@ export class UserCartComponent {
   pageSizeOptions: number[] = [2, 5, 10];
 
   constructor(private bookService: BookService, private locationService: LocationService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private modalService: ModalService) {
-    this.getCartItems();
+    this.getFavouriteItems();
   }
 
   @ViewChild(MatPaginator)
@@ -38,11 +38,11 @@ export class UserCartComponent {
   pageChanged(event: PageEvent) {
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex;
-    this.getCartItems();
+    this.getFavouriteItems();
   }
 
-  getCartItems() {
-    this.bookService.getBooksFromCart(this.currentPage, this.pageSize, this.search).subscribe(
+  getFavouriteItems() {
+    this.bookService.getBooksFromFavourite(this.currentPage, this.pageSize, this.search).subscribe(
       (locationDto: any) => {
         console.log(locationDto.content)
         this.books = locationDto.content;
@@ -54,9 +54,9 @@ export class UserCartComponent {
     )
   }
 
-  removeBookFromCart(bookId: number) {
-    this.modalService.onRemoveBookFromCart(bookId).pipe(take(1)).subscribe(result => {
-      this.getCartItems();
+  removeBookFromFavourite(bookId: number) {
+    this.modalService.onRemoveBookFromFavourite(bookId).pipe(take(1)).subscribe(result => {
+      this.getFavouriteItems();
     }, (error) => {
       console.log(error);
     })

@@ -11,14 +11,34 @@
     fixedTopGap="56"
   >
     <mat-nav-list>
-      <div mat-list-item class="nav-container  mt-3 ms-2">
-        <label id="book-availability-filter-label "> <span class="fs-5">Filter by availability</span></label>
-        
-        <mat-radio-group name="filter" name="filter"
-        [(ngModel)]="filter">
-          <mat-radio-button (change)="filterChange($event)" class="book-availability-button" color="primary" value="-1" checked="true">Borrowed Books</mat-radio-button>
-          <mat-radio-button (change)="filterChange($event)" class="book-availability-button" color="primary" value="0">All books</mat-radio-button>
-          <mat-radio-button (change)="filterChange($event)" class="book-availability-button" color="primary" value="1">Available Books</mat-radio-button>
+      <div mat-list-item class="nav-container mt-3 ms-2">
+        <label id="book-availability-filter-label ">
+          <span class="fs-5">Filter by availability</span></label
+        >
+
+        <mat-radio-group name="filter" name="filter" [(ngModel)]="filter">
+          <mat-radio-button
+            (change)="filterChange($event)"
+            class="book-availability-button"
+            color="primary"
+            value="-1"
+            checked="true"
+            >Reserved Books</mat-radio-button
+          >
+          <mat-radio-button
+            (change)="filterChange($event)"
+            class="book-availability-button"
+            color="primary"
+            value="0"
+            >All books</mat-radio-button
+          >
+          <mat-radio-button
+            (change)="filterChange($event)"
+            class="book-availability-button"
+            color="primary"
+            value="1"
+            >Available Books</mat-radio-button
+          >
         </mat-radio-group>
       </div>
     </mat-nav-list>
@@ -28,38 +48,52 @@
     <div class="container-fluid">
       <h1 class="fw-900 mt-3 ps-2 title">Book:-{{ book.title }}</h1>
       <hr class="title-br p-0" />
-      <div class="row ">
+      <div class="row">
         <div class="col-3 my-auto">
           <div class="sheet">
-            <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="setfileName($event)"
-              accept=".xlsx" />
-            <button mat-flat-button color="primary" (click)="csvInput.click()">Choose File (.xlsx)</button>
+            <input
+              #csvInput
+              hidden="true"
+              type="file"
+              onclick="this.value=null"
+              (change)="setfileName($event)"
+              accept=".xlsx"
+            />
+            <button mat-flat-button color="primary" (click)="csvInput.click()">
+              Choose File (.xlsx)
+            </button>
           </div>
         </div>
-       
+
         <div class="col-2 my-auto">
-          <button mat-flat-button color="accent" (click)="submitFile()" [disabled]="!file ">Submit</button>
+          <button
+            mat-flat-button
+            color="accent"
+            (click)="submitFile()"
+            [disabled]="!file"
+          >
+            Submit
+          </button>
         </div>
-        <div class="col-3 my-auto text-success tw-bold ">{{fileName}}</div>
+        <div class="col-3 my-auto text-success tw-bold">{{ fileName }}</div>
         <div class="col-4">
           <div class="row justify-content-end">
-
             <div class="col-3 justify-content-end">
-              <button class="align-content-end"
-              mat-raised-button
-              color="primary"
-              (click)="addEditBookStatus(0)"
-            >
-              <mat-icon>add</mat-icon>Add
-            </button>  </div>
-<div class="col-4"><button mat-icon-button (click)="snav.toggle()">
-  <mat-icon>filter_list</mat-icon>
-</button></div>  
-          
-           
-          
+              <button
+                class="align-content-end"
+                mat-raised-button
+                color="primary"
+                (click)="addEditBookStatus(0)"
+              >
+                <mat-icon>add</mat-icon>Add
+              </button>
+            </div>
+            <div class="col-4">
+              <button mat-icon-button (click)="snav.toggle()">
+                <mat-icon>filter_list</mat-icon>
+              </button>
+            </div>
           </div>
-    
         </div>
       </div>
 
@@ -82,17 +116,19 @@
           </tbody>
         </table>
       </div>
-    
-    <div class="mt-5">
+
+      <div class="mt-5">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
           <ng-container matColumnDef="noRecord">
             <td mat-footer-cell *matFooterCellDef>No records found.</td>
-      </ng-container>
+          </ng-container>
           <ng-container matColumnDef="index">
             <th mat-header-cell *matHeaderCellDef>Index</th>
-            <td mat-cell *matCellDef="let element; let i = index">{{(pageSize*currentPage)+i }}</td>
+            <td mat-cell *matCellDef="let element; let i = index">
+              {{ pageSize * currentPage + i }}
+            </td>
           </ng-container>
-          
+
           <ng-container matColumnDef="floorNo">
             <th mat-header-cell *matHeaderCellDef>Floor No.</th>
             <td mat-cell *matCellDef="let element">{{ element.floorNo }}</td>
@@ -115,24 +151,34 @@
           <ng-container matColumnDef="isAvailable">
             <th mat-header-cell *matHeaderCellDef>Available</th>
             <td mat-cell *matCellDef="let element">
-          
-           <button
-           *ngIf = "element.isAvailable"
-                  mat-raised-button
-                  color="primary"
-                  (click)="checkIn(element.bookStatusId)"
-                >
+              <button
+                *ngIf="element.isAvailable"
+                mat-raised-button
+                color="primary"
+                (click)="checkIn(element.bookStatusId,element.isReserved)"
+              >
                 Check in
-          </button>
-          <button
-          *ngIf = "!element.isAvailable"
-                 mat-raised-button
-                 color="accent"
-                 (click)="checkOut(element.bookStatusId)"
-               >
-               Check out
-         </button>
-          </td>
+              </button>
+              <button
+                *ngIf="!element.isAvailable"
+                mat-raised-button
+                color="accent"
+                (click)="checkOut(element.bookStatusId)"
+              >
+                Check out
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="isReserved">
+            <th mat-header-cell *matHeaderCellDef>Reserved</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-chip *ngIf="element.isReserved" class="bg-warning">
+                <div class="text-success p-2 fw-bold"> True </div>
+              </mat-chip>
+              <mat-chip *ngIf="!element.isReserved" class="bg-warning text-danger">
+                <div class="text-danger p-2 fw-bold"> False </div>
+              </mat-chip>
+            </td>
           </ng-container>
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>Action</th>
@@ -140,14 +186,16 @@
               <span class="location-accordion-item-description">
                 <button
                   mat-raised-button
-                  color="primary" class="me-2"
+                  color="primary"
+                  class="me-2"
                   (click)="addEditBookStatus(element.bookStatusId)"
                 >
                   <mat-icon>edit</mat-icon>Edit
                 </button>
                 <button
                   mat-raised-button
-                  color="accent" class="ms-2"
+                  color="accent"
+                  class="ms-2"
                   (click)="deleteBookStatus(element.bookStatusId)"
                 >
                   <mat-icon>delete</mat-icon>Delete
@@ -157,7 +205,7 @@
           </ng-container>
           <ng-template [ngIf]="dataSource?.data.length === 0">
             <tr mat-footer-row *matFooterRowDef="['noRecord']"></tr>
-        </ng-template>
+          </ng-template>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr
             mat-row

@@ -3,7 +3,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Shelf } from 'src/app/model/shelf';
 import { LocationService } from 'src/app/service/location.service';
-import { NoSpaceValidator } from 'src/app/validator/noSpace.validator';
 import Swal from 'sweetalert2';
 
 @Component({

@@ -18,11 +18,15 @@ import { DeleteAuthorComponent } from '../modals/delete-author/delete-author.com
 import { DeleteLocationModalComponent } from '../modals/delete-location-modal/delete-location-modal.component';
 import { ChangeBookStatusModalComponent } from '../modals/change-book-status-modal/change-book-status-modal.component';
 import { DeleteBookStatusModalComponent } from '../modals/delete-book-status-modal/delete-book-status-modal.component';
-import { AddBookToCartModalComponent } from '../modals/add-book-to-cart-modal/add-book-to-cart-modal.component';
+import { AddBookToFavouriteModalComponent } from '../modals/add-book-to-favourite-modal/add-book-to-favourite-modal.component';
 import { AddBookReservationByUserModalComponent } from '../modals/add-book-reservation-by-user-modal/add-book-reservation-by-user-modal.component';
-import { RemoveBookFromCartModalComponent } from '../modals/remove-book-from-cart-modal/remove-book-from-cart-modal.component';
+import { RemoveBookFromFavouriteModalComponent } from '../modals/remove-book-from-favourite-modal/remove-book-from-favourite-modal.component';
 import { AcceptReservationModalComponent } from '../modals/accept-reservation-modal/accept-reservation-modal.component';
 import { RejectReservationModalComponent } from '../modals/reject-reservation-modal/reject-reservation-modal.component';
+import { AutoDeleteLocationModalComponent } from '../modals/auto-delete-location-modal/auto-delete-location-modal.component';
+import { AutoDeleteShelfModalComponent } from '../modals/auto-delete-shelf-modal/auto-delete-shelf-modal.component';
+import { AutoDeleteSectionModalComponent } from '../modals/auto-delete-section-modal/auto-delete-section-modal.component';
+import { AutoDeleteFloorModalComponent } from '../modals/auto-delete-floor-modal/auto-delete-floor-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -135,9 +139,10 @@ export class ModalService {
     }))
   }
 
-  chechIn(bookStatusId: number) {
+  chechIn(bookStatusId: number,isReserved:boolean) {
     const modal = this.ngbModal.open(ChechInModalComponent);
-    modal.componentInstance.bookStatusId = bookStatusId;
+    modal.componentInstance.bookStatusId = {bookStatusId};
+    modal.componentInstance.reserved = isReserved;
     return from(modal.result).pipe(catchError(error => {
       return of(error);
     }))
@@ -174,8 +179,8 @@ export class ModalService {
     }))
   }
 
-  onAddBookToCart(bookId: number) {
-    const modal = this.ngbModal.open(AddBookToCartModalComponent);
+  onAddBookToFavourite(bookId: number) {
+    const modal = this.ngbModal.open(AddBookToFavouriteModalComponent);
     modal.componentInstance.bookDetailsId = bookId;
     return from(modal.result).pipe(catchError(error => {
       return of(error);
@@ -188,8 +193,8 @@ export class ModalService {
       return of(error);
   }))}
 
-  onRemoveBookFromCart(bookId: number) {
-    const modal = this.ngbModal.open(RemoveBookFromCartModalComponent);
+  onRemoveBookFromFavourite(bookId: number) {
+    const modal = this.ngbModal.open(RemoveBookFromFavouriteModalComponent);
     modal.componentInstance.bookDetailsId = bookId;
     return from(modal.result).pipe(catchError(error => {
       return of(error);
@@ -212,5 +217,33 @@ export class ModalService {
       return of(error);
     }))
   }
+  autoDeleteLocationModal(locationId: number) {
+    const modal = this.ngbModal.open(AutoDeleteLocationModalComponent);
+    modal.componentInstance.locationId = locationId;
+    return from(modal.result).pipe(catchError(error => {
+      return of(error);
+    }))
+  }
+  autoDeleteShelfModal(shelfId: number) {
+    const modal = this.ngbModal.open(AutoDeleteShelfModalComponent);
+    modal.componentInstance.shelfId = shelfId;
+    return from(modal.result).pipe(catchError(error => {
+      return of(error);
+    }))
+  }
 
+  autoDeleteSectionModal(sectionId: number) {
+    const modal = this.ngbModal.open(AutoDeleteSectionModalComponent);
+    modal.componentInstance.sectionId = sectionId;
+    return from(modal.result).pipe(catchError(error => {
+      return of(error);
+    }))
+  }
+  autoDeleteFloorModal(floorId: number) {
+    const modal = this.ngbModal.open(AutoDeleteFloorModalComponent);
+    modal.componentInstance.floorId = floorId;
+    return from(modal.result).pipe(catchError(error => {
+      return of(error);
+    }))
+  }
 }

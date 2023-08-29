@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddBookToCartModalComponent } from './add-book-to-cart-modal.component';
+import { AddBookToFavouriteModalComponent } from './add-book-to-favourite-modal.component';
 
 describe('AddBookToCartModalComponent', () => {
-  let component: AddBookToCartModalComponent;
-  let fixture: ComponentFixture<AddBookToCartModalComponent>;
+  let component: AddBookToFavouriteModalComponent;
+  let fixture: ComponentFixture<AddBookToFavouriteModalComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AddBookToCartModalComponent]
+      declarations: [AddBookToFavouriteModalComponent]
     });
-    fixture = TestBed.createComponent(AddBookToCartModalComponent);
+    fixture = TestBed.createComponent(AddBookToFavouriteModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

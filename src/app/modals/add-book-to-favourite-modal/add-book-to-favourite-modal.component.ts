@@ -5,11 +5,11 @@ import { LocationService } from 'src/app/service/location.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-add-book-to-cart-modal',
-  templateUrl: './add-book-to-cart-modal.component.html',
-  styleUrls: ['./add-book-to-cart-modal.component.css']
+  selector: 'app-add-book-to-favourite-modal',
+  templateUrl: './add-book-to-favourite-modal.component.html',
+  styleUrls: ['./add-book-to-favourite-modal.component.css']
 })
-export class AddBookToCartModalComponent {
+export class AddBookToFavouriteModalComponent {
   id:any;
   isError!:boolean;
   error_msg!:string;
@@ -35,14 +35,14 @@ export class AddBookToCartModalComponent {
   constructor(private bookService: BookService,public activeModal: NgbActiveModal,private changeDetectorRef: ChangeDetectorRef, private locationService: LocationService) {
    
   }
-  addBookToCart(){
+  addBookToFavourite(){
     console.log(this.id+"a");
     
-      this.bookService.addBookDetailsToCart(this.id).subscribe((res)=>{
+      this.bookService.addBookDetailsToFavourite(this.id).subscribe((res)=>{
         this.activeModal.close(true);
         this.Toast.fire({
           icon: 'success',
-          title: 'Successfully added book to cart'
+          title: 'Successfully added book to favourite'
         })
       },
       (error)=>{

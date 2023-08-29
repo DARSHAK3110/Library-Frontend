@@ -20,7 +20,7 @@ import { UnLocatedBookComponent } from './components/admin/library/un-located-bo
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { UserBookComponent } from './components/user/library/user-book/user-book.component';
 import { UserReservationComponent } from './components/user/library/user-reservation/user-reservation.component';
-import { UserCartComponent } from './components/user/library/user-cart/user-cart.component';
+import { UserFavouriteComponent } from './components/user/library/user-favourite/user-favourite.component';
 import { ContactUsComponent } from './components/user/library/contact-us/contact-us.component';
 import { userRoleGuard } from './guard/user-role.guard';
 import { UserBorrowingComponent } from './components/user/library/user-borrowing/user-borrowing.component';
@@ -51,7 +51,7 @@ const routes: Routes = [
       { path: "", component: UserDashboardComponent, canActivate: [userRoleGuard] },
       { path: "library/book", component: UserBookComponent, canActivate: [userRoleGuard] },
       { path: "library/reservation", component: UserReservationComponent, canActivate: [userRoleGuard] },
-      { path: "library/cart", component: UserCartComponent, canActivate: [userRoleGuard] },
+      { path: "library/favourite", component: UserFavouriteComponent, canActivate: [userRoleGuard] },
       { path: "library/contact", component: ContactUsComponent, canActivate: [userRoleGuard] },
       { path: "library/borrowing", component: UserBorrowingComponent, canActivate: [userRoleGuard] }
 

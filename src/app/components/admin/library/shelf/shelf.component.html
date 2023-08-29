@@ -45,8 +45,11 @@
                         <button class= "me-2" mat-raised-button color="primary" (click)="addEditShelf(element.shelfId)">
                             <mat-icon>edit</mat-icon>Edit
                         </button>
-                        <button class= "ms-2" mat-raised-button color="accent" (click)="deleteShelf(element.shelfId)">
+                        <button class= "ms-2" mat-raised-button color="accent" (click)="deleteShelf(element.shelfId,false)">
                             <mat-icon>delete</mat-icon>Delete
+                        </button>
+                        <button class= "ms-2" mat-raised-button color="primary" (click)="deleteShelf(element.shelfId,true)">
+                            <mat-icon>delete</mat-icon>Delete auto
                         </button>
                     </span> </td>
             </ng-container>

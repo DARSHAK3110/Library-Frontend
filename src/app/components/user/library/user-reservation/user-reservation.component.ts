@@ -22,7 +22,7 @@ const year = today.getFullYear();
   styleUrls: ['./user-reservation.component.css']
 })
 export class UserReservationComponent {
-  displayedColumns: string[] = ['index','reserver','title', 'reservationDate','status'];
+  displayedColumns: string[] = ['index','reserver','title', 'reservationDate','status','assignedBookId'];
   reservations: any;
   dataSource: any;
   maxDate:any;

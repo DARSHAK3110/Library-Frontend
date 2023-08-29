@@ -42,8 +42,11 @@
                         <button class= "me-2" mat-raised-button color="primary" (click)="addEditSection(element.sectionId)">
                             <mat-icon>edit</mat-icon>Edit
                         </button>
-                        <button class= "ms-2" mat-raised-button color="accent" (click)="deleteSection(element.sectionId)">
+                        <button class= "ms-2" mat-raised-button color="accent" (click)="deleteSection(element.sectionId,false)">
                             <mat-icon>delete</mat-icon>Delete
+                        </button>
+                        <button class= "ms-2" mat-raised-button color="primary" (click)="deleteSection(element.sectionId,true)">
+                            <mat-icon>delete</mat-icon>Delete auto
                         </button>
                     </span> </td>
             </ng-container>

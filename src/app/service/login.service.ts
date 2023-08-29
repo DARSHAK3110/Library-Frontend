@@ -8,72 +8,63 @@ import { catchError, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-  
   url = "http://localhost:8090/api/v1/users";
-  constructor(private http:HttpClient) {
-
-   }
-   private handleError(error: HttpErrorResponse) {
-   
+  constructor(private http: HttpClient) {
+  }
+  private handleError(error: HttpErrorResponse) {
     return throwError(() => error);
   }
-   doLogin(user:User){
+  doLogin(user: User) {
     localStorage.removeItem("token")
-    return this.http.post(`${this.url}/login`,user).pipe(catchError(this.handleError));
-   }
+    return this.http.post(`${this.url}/login`, user).pipe(catchError(this.handleError));
+  }
 
-   
-  loginUser(token:string, role:string, refreshToken:string, userId:any){
-    localStorage.setItem("token",token);
-    localStorage.setItem("role",role);
-    localStorage.setItem("refreshToken",refreshToken);
-    localStorage.setItem("userId",userId);
+  loginUser(token: string, role: string, refreshToken: string, userId: any) {
+    localStorage.setItem("token", token);
+    localStorage.setItem("role", role);
+    localStorage.setItem("refreshToken", refreshToken);
+    localStorage.setItem("userId", userId);
     return true;
   }
 
-  isLoggedIn(){
+  isLoggedIn() {
     let token = localStorage.getItem("token");
     console.log(token);
-    
-    if(token == null || token == undefined ||token === '' ){
+
+    if (token == null || token == undefined || token === '') {
       return false;
     }
     return true;
   }
 
-  isAdmin(){
+  isAdmin() {
     let role = localStorage.getItem("role");
-    if(role === "ADMIN"){
+    if (role === "ADMIN") {
       return true;
     }
-    else{
+    else {
       return false;
     }
   }
-  logoutUser(){
+  logoutUser() {
     this.localStorageCleaner();
-     window.location.href="/login"
+    window.location.href = "/login"
     return true;
   }
 
-  getToken(){
+  getToken() {
     return localStorage.getItem("token");
   }
 
-
-  getRefToken(){
+  getRefToken() {
     let token = String(localStorage.getItem("token"));
-    console.log(token);
-    
     let refreshToken = String(localStorage.getItem("refreshToken"));
-    console.log(refreshToken);
-    
-   this.localStorageCleaner();
-    let result:any = this.http.post(this.url+"/refresh",{"token":token,"refreshToken":refreshToken});
+    this.localStorageCleaner();
+    let result: any = this.http.post(this.url + "/refresh", { "token": token, "refreshToken": refreshToken });
     return result;
-  
   }
-  localStorageCleaner(){
+
+  localStorageCleaner() {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     localStorage.removeItem("userId");

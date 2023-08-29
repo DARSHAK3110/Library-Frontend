@@ -50,7 +50,7 @@
                 </span>
               </td>
             </ng-container>
-            <ng-template [*ngIf]="dataSource?.data.length === 0">
+            <ng-template [ngIf]="dataSource?.data.length === 0">
               <tr mat-footer-row *matFooterRowDef="['noRecord']"></tr>
           </ng-template>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -97,7 +97,8 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Action</th>
         <td mat-cell *matCellDef="let element">
-            <div class="" *ngIf="element.isAccepted == null && element.isBookAvailable">
+            <div class="" *ngIf="element.isAccepted == null && element.bookAvailable">
+              
               <button
                 mat-raised-button
                 color="primary"
@@ -116,16 +117,17 @@
               </button>
             </div>
             <div class="" *ngIf="element.isAccepted != null">
-              <span class="fw-800 text-success" *ngIf="element.isAccepted"
+              <span class="fw-800 text-success" *ngIf="element.isAccepted && element.deletedAt == null"
                 >Accepted</span
               >
+              <span class="fw-800 text-success" *ngIf="element.isAccepted && element.deletedAt!= null">Borrow already</span>
               <span class="fw-800 text-danger" *ngIf="!element.isAccepted"
                 >Rejected</span
               >
             </div>
           
           
-          <div class="bookAvail" *ngIf="!element.isBookAvailable && element.isAccepted == null">
+          <div class="bookAvail" *ngIf="!element.bookAvailable && element.isAccepted == null">
           <div class="text-danger">There are no boook available now!!</div>  
           </div>
         </td>

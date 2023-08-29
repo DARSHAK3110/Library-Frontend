@@ -60,12 +60,22 @@ export class LocationComponent {
     })
 
   }
-  deleteLocation(locationId: number) {
+  deleteLocation(locationId: number,isAutomated:boolean) {
     this.bookService.checkOrphanBooksByLocation(locationId,'location').pipe(take(1)).subscribe((res: any) => {
       let counter = Number(res.message);
       if (counter > 0) {
-        this._router.navigate([`/admin/library/unlocated/location/${locationId}`]);
+        if(isAutomated){
+          this.modalService.autoDeleteLocationModal(locationId).pipe(take(1)).subscribe((res: any) => {
+            this.getLocations();
+          }, (error) => {
+            console.log(error);
+          })
+        }
+        else{
+          this._router.navigate([`/admin/library/unlocated/location/${locationId}`]);    
+        }
       } else {
+      
         this.modalService.deleteLocationModal(locationId,'location').pipe(take(1)).subscribe((res: any) => {
           this.getLocations();
         }, (error) => {

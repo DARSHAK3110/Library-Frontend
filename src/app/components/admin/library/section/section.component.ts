@@ -59,14 +59,22 @@ export class SectionComponent {
       console.log(error);
     })
   }
-  deleteSection(sectionId: number) {
+  deleteSection(sectionId: number,isAutomated:boolean) {
     this.bookService.checkOrphanBooksByLocation(sectionId,'section').pipe(take(1)).subscribe((res: any) => {
       let counter = Number(res.message);
       if (counter > 0) {
-        
-        this._router.navigate([`/admin/library/unlocated/section/${sectionId}`]);
+        if(isAutomated){
+          this.modalService.autoDeleteSectionModal(sectionId).pipe(take(1)).subscribe((res: any) => {
+            this.getSections();
+          }, (error) => {
+            console.log(error);
+          })
+        }
+        else{
+          this._router.navigate([`/admin/library/unlocated/section/${sectionId}`]);
+        }
       } else {
-        this.modalService.deleteLocationModal(sectionId,'section').pipe(take(1)).subscribe((res: any) => {
+        this.modalService.autoDeleteSectionModal(sectionId).pipe(take(1)).subscribe((res: any) => {
           this.getSections();
         }, (error) => {
           console.log(error);
