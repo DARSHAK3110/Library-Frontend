@@ -20,7 +20,7 @@ url:string = String("http://localhost:8090/api/v1/users");
   }
 
   deleteUser(userId:number){
-    return this.httpClient.delete(`${this.url}/${userId}`).pipe(catchError(this.handleError));
+    return this.httpClient.delete(`${this.url}/${userId}`);
 
   }
 

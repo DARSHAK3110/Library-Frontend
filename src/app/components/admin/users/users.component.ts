@@ -6,6 +6,7 @@ import { DataService } from 'src/app/service/data.service';
 import { LoginService } from 'src/app/service/login.service';
 import { ModalService } from 'src/app/service/modal.service';
 import { UserService } from 'src/app/service/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-users',
@@ -31,8 +32,17 @@ export class UsersComponent {
   pageSize = 2;
   currentPage = 0;
   pageSizeOptions: number[] = [2, 5, 10];
-
-  @Input() Toast:any;
+  Toast:any = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 5000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
   constructor(private userService: UserService, private loginService: LoginService, private modalService: ModalService,private dataService: DataService) {
     this.getUsers()
   }
@@ -68,20 +78,27 @@ export class UsersComponent {
   deleteUser(phoneNumber: number) {
     this.modalService.onDelete("Are you sure delete this user?", "DeleteUser").pipe(take(1)).subscribe(result => {
       if (result === true) {
-        this.userService.deleteUser(phoneNumber).subscribe((result => {
+        this.userService.deleteUser(phoneNumber).subscribe((result) => {
           this.Toast.fire({
             icon: 'success',
             title: 'Successfully deleted'
           });
           this.getUsers();
-        }))
+        },
+        (error)=>{
+          this.getUsers();
+          this.Toast.fire({
+            icon: 'error',
+            title: error
+          })
+        })
 
       }
 
     }, (error) => {
       this.Toast.fire({
         icon: 'error',
-        title: 'something went wrong'
+        title: 'Something went wrong'
       })
     })
 
@@ -109,7 +126,7 @@ export class UsersComponent {
     
       this.Toast.fire({
         icon: 'error',
-        title: 'something went wrong'
+        title: error
       })
     })
   }
