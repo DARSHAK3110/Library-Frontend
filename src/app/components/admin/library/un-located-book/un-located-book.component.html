@@ -1,5 +1,7 @@
-
-      <div class="mt-5">
+<div class="container-fluid">
+  <h1 class="fw-900 mt-3 ps-2 title">Un tracked books</h1><h5>(You need to relocate books first)</h5>
+  <hr class="title-br p-0">
+   <div class="mt-5">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
           <ng-container matColumnDef="noRecord">
             <td mat-footer-cell *matFooterCellDef>No records found.</td>
@@ -66,4 +68,6 @@
         >
         </mat-paginator>
       </div>
+</div>
+     
 

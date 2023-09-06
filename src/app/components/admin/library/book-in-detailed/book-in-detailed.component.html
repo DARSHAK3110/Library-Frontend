@@ -173,10 +173,10 @@
             <th mat-header-cell *matHeaderCellDef>Reserved</th>
             <td mat-cell *matCellDef="let element">
               <mat-chip *ngIf="element.isReserved" class="bg-warning">
-                <div class="text-success p-2 fw-bold"> True </div>
+                <div class="text-success p-2 fw-bold"> Yes </div>
               </mat-chip>
               <mat-chip *ngIf="!element.isReserved" class="bg-warning text-danger">
-                <div class="text-danger p-2 fw-bold"> False </div>
+                <div class="text-danger p-2 fw-bold"> No </div>
               </mat-chip>
             </td>
           </ng-container>

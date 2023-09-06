@@ -12,7 +12,7 @@ export class NavbarComponent {
   userType!: string;
   private _mobileQueryListener: () => void;
   mobileQuery: MediaQueryList;
-  adminNav = { "Users": "/admin", "Book": "/admin/library/book", "reservation": "/admin/library/reservation", "borrowing": "/admin/library/borrowing", "Author": "/admin/library/author", "Location": "/admin/library/location", "Floor": "/admin/library/floor", "Section": "/admin/library/section", "Shelf": "/admin/library/shelf" }
+  adminNav = { "Users": "/admin", "Book": "/admin/library/book", "Reservation": "/admin/library/reservation", "Borrowing": "/admin/library/borrowing", "Author": "/admin/library/author", "Location": "/admin/library/location", "Floor": "/admin/library/floor", "Section": "/admin/library/section", "Shelf": "/admin/library/shelf" }
   userNav = { "Profile": "/user", "Borrowing History": "/user/library/borrowing", "Books": "/user/library/book", "Reservation": "/user/library/reservation", "Contact Us": "/user/library/contact", "Favourite": "/user/library/favourite" }
   constructor(changeDetectorRef: ChangeDetectorRef, private loginService: LoginService, media: MediaMatcher) {
     this.role = String(localStorage.getItem("role"));

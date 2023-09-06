@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddBookToFavouriteModalComponent } from './add-book-to-favourite-modal.component';
 
-describe('AddBookToCartModalComponent', () => {
+describe('AddBookToFavouriteModalComponent', () => {
   let component: AddBookToFavouriteModalComponent;
   let fixture: ComponentFixture<AddBookToFavouriteModalComponent>;
 
