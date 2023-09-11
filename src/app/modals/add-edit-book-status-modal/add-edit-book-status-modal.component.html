@@ -48,7 +48,7 @@
                 <mat-form-field>
                     <mat-label>Position</mat-label>
                     <mat-select  [(ngModel)]="positionSelected" formControlName="position" name="position" >
-                        <mat-option *ngIf="id>0" [selected] [value]="location.locationId">
+                        <mat-option *ngIf="id>0 && (location.floorId == floorSelected) && (location.sectionId == sectionSelected) && (location.shelfId == shelfSelected)" [selected] [value]="location.locationId">
                             {{location.position}}
                         </mat-option>
                         <mat-option *ngFor="let p of positions" [value]="p.locationId">

@@ -135,7 +135,6 @@ export class AddEditLocationModalComponent {
     if (floorSelection != 0) {
       this.locationService.getAllSections(floorSelection).subscribe((res: any) => {
         this.sections = res;
-        
         this.sectionSelected = res[0]?.sectionId;
         this.getSectionSelection(this.sectionSelected);
         

@@ -26,6 +26,7 @@ export class AddEditBookStatusModalComponent {
   bookHeader: Book = new Book();
   shelfs: any;
   positions: any;
+  runAlready=-1;
   isAdd!: boolean;
   error_msg!: string;
   location: Location = new Location();
@@ -178,6 +179,9 @@ export class AddEditBookStatusModalComponent {
     if (shelfSelection != 0) {
       this.locationService.getAllPositions(shelfSelection).subscribe((res: any) => {
         this.positions = res;
+        this.runAlready = this.runAlready+1;
+        console.log(this.runAlready);
+        
         this.positionSelected = this.location.locationId;
       },
         (error) => {
