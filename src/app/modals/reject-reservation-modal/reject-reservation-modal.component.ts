@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BookService } from 'src/app/service/book.service';
+import { UserService } from 'src/app/service/user.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -30,11 +31,17 @@ export class RejectReservationModalComponent {
     this.changeDetectorRef.detectChanges();
   }
  
-  constructor(public activeModal: NgbActiveModal,private changeDetectorRef: ChangeDetectorRef, private bookService: BookService) {
+  constructor(private userService:UserService,public activeModal: NgbActiveModal,private changeDetectorRef: ChangeDetectorRef, private bookService: BookService) {
    
   }
   rejectReservation(){
-   this.bookService.rejectReservation(this.id).subscribe((res)=>{
+   this.bookService.rejectReservation(this.id).subscribe((res:any)=>{
+    this.userService.getUser(Number(res.message)).subscribe((res:any)=>{
+      this.bookService.sendMail(this.id,res.email,false).subscribe((res:any)=>{
+        console.log("complete");
+        
+      })
+    })
         this.activeModal.close(true);
         this.Toast.fire({
           icon: 'success',

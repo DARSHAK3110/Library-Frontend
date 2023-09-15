@@ -76,6 +76,7 @@ export class AddEditShelfComponent {
         (error) => {
           this.isError = true
           this.error_msg = error;
+          this.changeDetectorRef.detectChanges();
         });
     }
     else {
@@ -89,6 +90,7 @@ export class AddEditShelfComponent {
         (error) => {
           this.isError = true
           this.error_msg = error;
+          this.changeDetectorRef.detectChanges();
         });
     }
   }

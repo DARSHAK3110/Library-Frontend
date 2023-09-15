@@ -60,6 +60,7 @@ export class AddEditAuthorModalComponent {
         (error) => {
           this.isError = true
           this.error_msg = error 
+          this.changeDetectorRef.detectChanges();
         });
 
     }
@@ -69,7 +70,8 @@ export class AddEditAuthorModalComponent {
       },
         (error) => {
           this.isError = true
-          this.error_msg = error 
+          this.error_msg = error
+          this.changeDetectorRef.detectChanges(); 
         });
     }
  }

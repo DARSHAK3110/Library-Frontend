@@ -68,6 +68,7 @@ export class ChechInModalComponent {
       (error)=>{
         this.isError = true
         this.error_msg = error
+        this.changeDetectorRef.detectChanges();
       });
   }
 

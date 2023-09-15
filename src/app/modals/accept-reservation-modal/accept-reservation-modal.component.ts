@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ModalService } from 'src/app/service/modal.service';
+import { UserService } from 'src/app/service/user.service';
 @Component({
   selector: 'app-accept-reservation-modal',
   templateUrl: './accept-reservation-modal.component.html',
@@ -54,7 +55,7 @@ export class AcceptReservationModalComponent {
     this.getBookStatuses(this.isbn);
     this.changeDetectorRef.detectChanges();
   }
-  constructor(private route: ActivatedRoute, media: MediaMatcher, private modalService: ModalService, public activeModal: NgbActiveModal, private changeDetectorRef: ChangeDetectorRef, private bookService: BookService) {
+  constructor(private userService:UserService,private route: ActivatedRoute, media: MediaMatcher, private modalService: ModalService, public activeModal: NgbActiveModal, private changeDetectorRef: ChangeDetectorRef, private bookService: BookService) {
     this.mobileQuery = media.matchMedia('(max-width: 1000px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -90,7 +91,12 @@ export class AcceptReservationModalComponent {
   }
 
   reserveBookStatus(bookStatusId: number) {
-      this.bookService.acceptReservation(this.id,bookStatusId).subscribe((res) => {
+
+      this.bookService.acceptReservation(this.id,bookStatusId).subscribe((res:any) => {
+        this.userService.getUser(Number(res.message)).subscribe((res:any)=>{
+          this.bookService.sendMail(this.id,res.email,true).subscribe((res:any)=>{
+          })
+        })
         this.activeModal.close(true);
         this.Toast.fire({
           icon: 'success',

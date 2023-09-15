@@ -53,6 +53,7 @@ export class ChechOutModalComponent {
       (error)=>{
         this.isError = true
         this.error_msg = error
+        this.changeDetectorRef.detectChanges();
       });
   } 
 

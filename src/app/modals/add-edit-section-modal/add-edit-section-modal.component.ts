@@ -73,6 +73,7 @@ export class AddEditSectionModalComponent {
         (error) => {
           this.isError = true
           this.error_msg = error;
+          this.changeDetectorRef.detectChanges();
         });
 
     }
@@ -87,6 +88,7 @@ export class AddEditSectionModalComponent {
         (error) => {
           this.isError = true
           this.error_msg = error
+          this.changeDetectorRef.detectChanges();
         });
     }
   }

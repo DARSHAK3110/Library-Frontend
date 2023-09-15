@@ -48,7 +48,7 @@ export class AddBookToFavouriteModalComponent {
       (error)=>{
         this.isError = true
         this.error_msg = error;
-     
+        this.changeDetectorRef.detectChanges();
       this.Toast.fire({
         icon: 'error',
         title: `Can't add now cotact admin!!`

@@ -53,6 +53,7 @@ export class AddEditFloorModalComponent {
         (error) => {
           this.isError = true
            this.error_msg = error
+           this.changeDetectorRef.detectChanges();
         });
     }
     else {
@@ -67,6 +68,7 @@ export class AddEditFloorModalComponent {
         (error) => {
           this.isError = true
           this.error_msg = error
+          this.changeDetectorRef.detectChanges();
         });
 
     }

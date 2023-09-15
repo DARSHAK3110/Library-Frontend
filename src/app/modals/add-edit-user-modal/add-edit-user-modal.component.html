@@ -51,7 +51,25 @@
                     </div>
     
 
-
+                    <div class="form-group">
+                        <label for="email">email</label>
+                        <input type="text" class="form-control" id="email" formControlName="email"
+                            placeholder="Enter email" name="email" 
+                            
+                            >
+                                    <div *ngIf="fc.email.errors?.required">     
+                        <div class="text-danger" *ngIf="fc.email.touched && fc.email.invalid">
+                            Email required.
+                        </div>
+                        </div>
+                                    <div *ngIf="!fc.email.errors?.required">
+                        <div *ngIf="fc.email.errors?.NoSpaceValidator">
+                            <div class="text-danger" *ngIf="fc.email.touched && fc.email.invalid">
+                            Email invalid!!!
+                            </div>
+                        </div>
+                        </div>
+                        </div>
             <div class="form-group" >
                 <label for="phone-number">Phone number:</label>
                 <input type="number" [ngClass]=" !isAdd ? 'disabled': '' " class="form-control" id="phone-number" formControlName="phoneNumber"

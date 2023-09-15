@@ -77,6 +77,7 @@ export class AddEditBookComponent {
         (error) => {
           this.isError = true
           this.error_msg = error
+          this.changeDetectorRef.detectChanges();
         });
 
     }
@@ -91,6 +92,7 @@ export class AddEditBookComponent {
         (error) => {
           this.isError = true
           this.error_msg = error
+          this.changeDetectorRef.detectChanges();
         });
 
     }

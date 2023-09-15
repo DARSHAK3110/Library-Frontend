@@ -72,6 +72,7 @@ export class DeleteBookStatusModalComponent {
       (error)=>{
         this.isError = true
         this.error_msg = error;
+        
         this.activeModal.close(true);
       this.Toast.fire({
         icon: 'error',

@@ -52,6 +52,7 @@ export class AutoDeleteFloorModalComponent {
         (error) => {
           this.isError = true
            this.error_msg = error
+           this.changeDetectorRef.detectChanges();
         });
   }
 

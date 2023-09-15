@@ -10,6 +10,7 @@ import { catchError, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class BookService {
+ 
 
   url: string = String("http://localhost:8091/library/api/v1");
   constructor(private httpClient: HttpClient) {
@@ -157,6 +158,10 @@ export class BookService {
   acceptReservation(id: any, bookStatusId: number) {
     let dto = { 'status': true, 'bookStatusId': bookStatusId }
     return this.httpClient.post(`${this.url}/reservations/status/${id}`, dto);
+  }
+
+  sendMail(reservastionId:number,email: string,status:boolean) {
+    return this.httpClient.post(`${this.url}/reservations/mail/${reservastionId}`,{"email":email, "status":status});
   }
   getBorrowings(currentPage: number, pageSize: number, search: string) {
     return this.httpClient.get(`${this.url}/borrowings`, { params: new HttpParams().set("search", search).set("user", false).set("pageSize", pageSize).set("pageNumber", currentPage) });

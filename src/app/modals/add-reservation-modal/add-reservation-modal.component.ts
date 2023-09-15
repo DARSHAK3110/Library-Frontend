@@ -61,19 +61,21 @@ export class AddReservationModalComponent {
     this.reserver.phone = reserverPhoneNumber;
     this.reserver.bookDetailsId = this.id;
     this.reserver.reservationDate = reservationDate;
-  
+    
       this.bookService.addReservation(this.reserver).subscribe((res)=>{
         this.activeModal.close(true);
       },
       (error)=>{
         this.isError = true
         this.error_msg = error
+        this.changeDetectorRef.detectChanges();
       });
 
   }
   checkUser(){
-    this.userService.getUser(this.form.controls['reserverPhoneNumber'].value).subscribe((res)=>{
+    this.userService.getUser(this.form.controls['reserverPhoneNumber'].value).subscribe((res:any)=>{
       this.isReserverCheked = true;
+      this.reserver.email=res.email;
       this.bookService.countCurrentBorrowings(this.form.controls['reserverPhoneNumber'].value).subscribe((res)=>{
         if(res){
           this.isUserHasLessBooks=true

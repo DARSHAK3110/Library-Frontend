@@ -6,6 +6,6 @@ export class User {
     userId?:number
     phoneNumber?:number
     role?:string
-
+    email?:string
     constructor(){}
 }

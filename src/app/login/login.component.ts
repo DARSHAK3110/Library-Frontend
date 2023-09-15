@@ -40,9 +40,9 @@ export class LoginComponent {
       },
       error => {
         this.error_msg = "Check your Credential";
-        if (this.error_msg.length > 0) {
+         
           this.isError = true;
-        }
+        
       }
     )
   }

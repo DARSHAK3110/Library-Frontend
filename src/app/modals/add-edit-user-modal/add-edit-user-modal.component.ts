@@ -50,12 +50,14 @@ export class AddEditUserModalComponent {
     let lastName = this.form.controls['lastName'].value;
     let phoneNumber = this.form.controls['phoneNumber'].value;
     let password = this.form.controls['password'].value;
+    let email = this.form.controls['email'].value;
     this.user.firstName = firstName;
     this.user.lastName = lastName;
 
     if(this.id == 0){
       this.user.phoneNumber = phoneNumber;
       this.user.password = password;
+      this.user.email = email;
     }
    
     if(this.user.userId === undefined){
@@ -64,8 +66,10 @@ export class AddEditUserModalComponent {
         this.activeModal.close(true);
       },
       (error)=>{
-        this.isError = true
+        console.log(error);
         this.error_msg = error
+        this.isError = true
+        this.changeDetectorRef.detectChanges();
       });
 
     }
@@ -76,6 +80,7 @@ export class AddEditUserModalComponent {
       (error)=>{
         this.isError = true
         this.error_msg = error
+        this.changeDetectorRef.detectChanges();
       });
 
     }
@@ -89,7 +94,8 @@ export class AddEditUserModalComponent {
       firstName: ['', [Validators.required, NoSpaceValidator.noSpaceValidators]],
       lastName: ['', [Validators.required, NoSpaceValidator.noSpaceValidators]],
       phoneNumber: ['',[Validators.required, Validators.min(1000000000), Validators.max(9999999999), phoneNumberValidator.phoneNumberValidations]],
-      password: ['',[Validators.required, Validators.minLength(6), Validators.maxLength(8)]]
+      password: ['',[Validators.required, Validators.minLength(6), Validators.maxLength(8)]],
+      email: ['',[Validators.email]]
     });
 
 
@@ -97,13 +103,15 @@ export class AddEditUserModalComponent {
       this.isAdd = false;
       this.form.get('phoneNumber').disable();
       this.form.get('password').disable();
+      this.form.get('email').disable();
       this.userService.getUser(this.id).subscribe((res)=>{
         this.user = res;
         this.form.patchValue({
           "firstName": this.user.firstName,
           "lastName": this.user.lastName,
           "password": this.user.password,
-          "phoneNumber": this.user.phoneNumber
+          "phoneNumber": this.user.phoneNumber,
+          "email": this.user.email
         })
       },
       error=>{
@@ -115,4 +123,6 @@ export class AddEditUserModalComponent {
       )
     }   
   }
+
+ 
 }

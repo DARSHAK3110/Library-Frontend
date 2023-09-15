@@ -76,6 +76,7 @@ export class AddEditLocationModalComponent {
         (error) => {
           this.isError = true
           this.error_msg = error
+          this.changeDetectorRef.detectChanges();
         });
 
     }
@@ -90,6 +91,7 @@ export class AddEditLocationModalComponent {
         (error) => {
           this.isError = true
           this.error_msg = error
+          this.changeDetectorRef.detectChanges();
         });
 
     }
@@ -155,10 +157,6 @@ export class AddEditLocationModalComponent {
 
   getSectionSelection(sectionSelection:any) {
     if (sectionSelection != 0) {
-      console.log(sectionSelection);
-      console.log(this.floorSelected);
-      console.log(this.sectionSelected);
-      
       this.locationService.getAllShelfs(sectionSelection).subscribe((res: any) => {
         this.shelfs = res;
         this.shelfSelected = res[0]?.shelfId;
